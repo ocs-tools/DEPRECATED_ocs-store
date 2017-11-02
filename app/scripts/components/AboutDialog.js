@@ -61,14 +61,20 @@ export default class AboutDialog extends Component {
 
             .about-dialog-content .content .banner {
                 height: 128px;
-                margin-bottom: 2em;
                 background-position: center center;
                 background-repeat: no-repeat;
                 background-size: contain;
             }
 
+            .about-dialog-content .content .title {
+                margin-top: 1em;
+            }
+
+            .about-dialog-content .content .version {
+            }
+
             .about-dialog-content .content .description {
-                margin: 1em 0;
+                margin-top: 1em;
             }
 
             .about-dialog-content .control {

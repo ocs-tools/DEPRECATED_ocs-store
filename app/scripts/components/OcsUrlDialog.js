@@ -47,15 +47,20 @@ export default class OcsUrlDialog extends Component {
 
         return `
             <div class="ocsurl-dialog-content">
+
+            <div class="content">
             <h1 class="title">${message}</h1>
             <p class="description">
             File: ${ocsUrlFilename}<br>
             Type: ${ocsUrlType}
             </p>
-            <p class="control">
+            </div>
+
+            <nav class="control">
             <button data-dispatch="process-ocs-url" data-params='${params}'>OK</button>
             <button name="cancel">Cancel</button>
-            </p>
+            </nav>
+
             </div>
         `;
     }
@@ -84,17 +89,19 @@ export default class OcsUrlDialog extends Component {
                 box-shadow: 0 0 2em 0.6em rgba(0,0,0,0.2);
             }
 
-            .ocsurl-dialog-content .title {
-                flex: 0 0 auto;
-                height: auto;
-                padding: 2em;
+            .ocsurl-dialog-content .content {
+                flex: 1 1 auto;
+                height: 100%;
+                padding: 1em 2em;
+            }
+
+            .ocsurl-dialog-content .content .title {
+                margin-top: 1em;
                 font-size: 100%;
             }
 
-            .ocsurl-dialog-content .description {
-                flex: 1 1 auto;
-                height: 100%;
-                padding: 0 2em;
+            .ocsurl-dialog-content .content .description {
+                margin-top: 1em;
             }
 
             .ocsurl-dialog-content .control {
