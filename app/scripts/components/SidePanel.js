@@ -16,7 +16,7 @@ export default class SidePanel extends Component {
             </header>
 
             <ul class="menu-items-main">
-            <li><button class="menu-item" data-dispatch="about-page">About This App</button></li>
+            <li><button class="menu-item" data-dispatch="about-dialog">About This App</button></li>
             </ul>
 
             <ul class="menu-items-footer">
