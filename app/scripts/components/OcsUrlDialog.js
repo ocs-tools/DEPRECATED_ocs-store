@@ -46,6 +46,8 @@ export default class OcsUrlDialog extends Component {
         });
 
         return `
+            <button class="ocsurl-dialog-close-button icon-close" name="close"></button>
+
             <div class="ocsurl-dialog-content">
 
             <div class="content">
@@ -79,6 +81,26 @@ export default class OcsUrlDialog extends Component {
         this.element.style.overflow = 'hidden';
 
         return `
+            .ocsurl-dialog-close-button {
+                position: relative;
+                left: 230px;
+                top: 18px;
+                display: inline-block;
+                width: 32px;
+                height: 32px;
+                border: 3px solid rgba(0,0,0,0.9);
+                border-radius: 32px;
+                outline: none;
+                background-color: #eeeeee;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                transition: background-color 0.3s ease-out;
+            }
+            .ocsurl-dialog-close-button:hover {
+                background-color: #c7c7c7;
+            }
+
             .ocsurl-dialog-content {
                 display: flex;
                 flex-flow: column nowrap;
@@ -127,6 +149,12 @@ export default class OcsUrlDialog extends Component {
         if (!this.state) {
             return;
         }
+
+        this.element.querySelector('button[name="close"]').addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            this.hide();
+        }, false);
 
         this.element.querySelector('button[name="cancel"]').addEventListener('click', (event) => {
             event.preventDefault();
