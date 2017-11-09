@@ -33,7 +33,7 @@ export default class ToolBar extends Component {
             <span class="toolbar-indicator icon-loading"></span>
             <span class="toolbar-spacer"></span>
             <select class="toolbar-select" name="startPage">
-            <option value="">Choose Desktop</option>
+            <option value="">Choose Startpage</option>
             <option value="https://www.opendesktop.org/">opendesktop.org</option>
             <option value="https://www.gnome-look.org/">gnome-look.org</option>
             <option value="https://store.kde.org/">store.kde.org</option>

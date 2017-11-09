@@ -18,7 +18,8 @@ TRANSFERLOG="${PROJDIR}/transfer.log"
 install_nodejs() {
     npm cache clean
     npm install n -g
-    n stable
+    #n stable
+    n lts
     ln -sf /usr/local/bin/node /usr/bin/node
     ln -sf /usr/local/bin/node /usr/bin/nodejs
     ln -sf /usr/local/bin/npm /usr/bin/npm

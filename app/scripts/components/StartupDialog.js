@@ -2,14 +2,20 @@
 
 import Component from 'js/Component.js';
 
+import packageMeta from '../../../package.json';
+
 export default class StartupDialog extends Component {
 
     html() {
         return `
             <div class="startup-dialog-content">
+
+            <div class="content">
             <div class="banner icon-ocsstore"></div>
-            <h1 class="title">Welcome to OCS-Store</h1>
+            <h1 class="title">Welcome to ${packageMeta.productName}</h1>
             <span class="indicator icon-loading">Starting</span>
+            </div>
+
             </div>
         `;
     }
@@ -31,31 +37,35 @@ export default class StartupDialog extends Component {
             .startup-dialog-content {
                 display: flex;
                 flex-flow: column nowrap;
-                justify-content: center;
-                align-items: center;
                 width: 460px;
-                height: 300px;
-                padding: 2em;
+                height: 260px;
                 border-radius: 0.6em;
-                background-color: #eeeeee;
+                background-color: #ffffff;
                 box-shadow: 0 0 2em 0.6em rgba(0,0,0,0.2);
             }
 
-            .startup-dialog-content .banner {
-                width: 128px;
+            .startup-dialog-content .content {
+                flex: 1 1 auto;
+                height: 100%;
+                padding: 1em 2em;
+                text-align: center;
+            }
+
+            .startup-dialog-content .content .banner {
                 height: 128px;
                 background-position: center center;
                 background-repeat: no-repeat;
                 background-size: contain;
             }
 
-            .startup-dialog-content .title {
-                margin: 2em 0;
+            .startup-dialog-content .content .title {
+                margin-top: 1em;
                 font-size: 100%;
             }
 
-            .startup-dialog-content .indicator {
+            .startup-dialog-content .content .indicator {
                 display: inline-block;
+                margin-top: 1em;
                 padding-left: 24px;
                 background-position: left center;
                 background-repeat: no-repeat;

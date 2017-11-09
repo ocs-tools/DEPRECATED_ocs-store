@@ -185,6 +185,10 @@ import Root from '../components/Root.js';
             root.sidePanel.toggle();
         });
 
+        statusManager.registerAction('about-dialog', () => {
+            root.mainArea.aboutDialog.show();
+        });
+
         statusManager.registerAction('ocs-url-dialog', (resolve, reject, params) => {
             root.mainArea.ocsUrlDialog.update({
                 ocsUrl: params.ocsUrl,
@@ -278,19 +282,6 @@ import Root from '../components/Root.js';
 
         statusManager.registerAction('remove-file', (resolve, reject, params) => {
             sendWebSocketMessage(params.itemKey, 'ItemHandler::uninstall', [params.itemKey]);
-        });
-
-        statusManager.registerAction('about-page', () => {
-            root.toolBar.update({
-                backAction: '',
-                forwardAction: '',
-                homeAction: 'browse-page',
-                collectionAction: 'collection-page',
-                indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade
-            });
-
-            root.mainArea.changePage('aboutPage');
         });
 
         statusManager.registerAction('upgrade-page', () => {

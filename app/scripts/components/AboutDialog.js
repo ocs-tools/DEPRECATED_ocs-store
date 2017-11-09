@@ -1,66 +1,29 @@
 'use strict';
 
-const url = require('url');
-
 import Component from 'js/Component.js';
 
-export default class OcsUrlDialog extends Component {
+import packageMeta from '../../../package.json';
+
+export default class AboutDialog extends Component {
 
     html() {
-        if (!this.state) {
-            return '';
-        }
-
-        const parsedUrl = url.parse(this.state.ocsUrl, true);
-
-        let message = '';
-        if (parsedUrl.hostname === 'download') {
-            message = 'Do you want to download?';
-        }
-        else if (parsedUrl.hostname === 'install') {
-            message = 'Do you want to install?';
-        }
-
-        let ocsUrlUrl = '';
-        if (parsedUrl.query.url) {
-            ocsUrlUrl = parsedUrl.query.url;
-        }
-
-        let ocsUrlType = 'Unknown';
-        if (parsedUrl.query.type && this.state.installTypes[parsedUrl.query.type]) {
-            ocsUrlType = this.state.installTypes[parsedUrl.query.type].name;
-        }
-
-        let ocsUrlFilename = 'Unknown';
-        if (parsedUrl.query.filename) {
-            ocsUrlFilename = parsedUrl.query.filename;
-        }
-        else if (ocsUrlUrl) {
-            ocsUrlFilename = decodeURIComponent(ocsUrlUrl.split('/').pop());
-        }
-
-        const params = JSON.stringify({
-            ocsUrl: this.state.ocsUrl,
-            providerKey: this.state.providerKey,
-            contentId: this.state.contentId
-        });
-
         return `
-            <button class="ocsurl-dialog-close-button icon-close" name="close"></button>
+            <button class="about-dialog-close-button icon-close" name="close"></button>
 
-            <div class="ocsurl-dialog-content">
+            <div class="about-dialog-content">
 
             <div class="content">
-            <h1 class="title">${message}</h1>
-            <p class="description">
-            File: ${ocsUrlFilename}<br>
-            Type: ${ocsUrlType}
-            </p>
+            <div class="banner icon-ocsstore"></div>
+            <h1 class="title">${packageMeta.productName}</h1>
+            <h3 class="version">Version ${packageMeta.version}</h3>
+            <p class="description">${packageMeta.description}</p>
+            <p>Author: ${packageMeta.author}</p>
+            <p>License: ${packageMeta.license}</p>
+            <p>Website: <a href="${packageMeta.homepage}" target="_blank">${packageMeta.homepage}</a></p>
             </div>
 
             <nav class="control">
-            <button data-dispatch="process-ocs-url" data-params='${params}'>OK</button>
-            <button name="cancel">Cancel</button>
+            <button name="cancel">Close</button>
             </nav>
 
             </div>
@@ -81,7 +44,7 @@ export default class OcsUrlDialog extends Component {
         this.element.style.overflow = 'hidden';
 
         return `
-            .ocsurl-dialog-close-button {
+            .about-dialog-close-button {
                 position: relative;
                 left: 226px;
                 top: 18px;
@@ -98,36 +61,46 @@ export default class OcsUrlDialog extends Component {
                 box-shadow: 0 0 1px 2px rgba(0,0,0,0.2);
                 transition: background-color 0.3s ease-out;
             }
-            .ocsurl-dialog-close-button:hover {
+            .about-dialog-close-button:hover {
                 background-color: #eeeeee;
             }
 
-            .ocsurl-dialog-content {
+            .about-dialog-content {
                 display: flex;
                 flex-flow: column nowrap;
                 width: 460px;
-                height: 200px;
+                height: 460px;
                 border-radius: 0.6em;
                 background-color: #ffffff;
                 box-shadow: 0 0 2em 0.6em rgba(0,0,0,0.2);
             }
 
-            .ocsurl-dialog-content .content {
+            .about-dialog-content .content {
                 flex: 1 1 auto;
                 height: 100%;
                 padding: 1em 2em;
+                text-align: center;
             }
 
-            .ocsurl-dialog-content .content .title {
+            .about-dialog-content .content .banner {
+                height: 128px;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+
+            .about-dialog-content .content .title {
                 margin-top: 1em;
-                font-size: 100%;
             }
 
-            .ocsurl-dialog-content .content .description {
+            .about-dialog-content .content .version {
+            }
+
+            .about-dialog-content .content .description {
                 margin-top: 1em;
             }
 
-            .ocsurl-dialog-content .control {
+            .about-dialog-content .control {
                 flex: 0 0 auto;
                 height: auto;
                 padding: 1em 2em;
@@ -137,7 +110,7 @@ export default class OcsUrlDialog extends Component {
                 text-align: right;
             }
 
-            .ocsurl-dialog-content .control button {
+            .about-dialog-content .control button {
                 margin: 0 0.2em;
                 padding: 0.3em 0.5em;
             }
@@ -146,10 +119,6 @@ export default class OcsUrlDialog extends Component {
 
     script() {
         this.hide();
-
-        if (!this.state) {
-            return;
-        }
 
         this.element.querySelector('button[name="close"]').addEventListener('click', (event) => {
             event.preventDefault();
