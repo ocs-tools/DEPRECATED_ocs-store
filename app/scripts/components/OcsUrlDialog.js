@@ -95,7 +95,7 @@ export default class OcsUrlDialog extends Component {
                 background-position: center center;
                 background-repeat: no-repeat;
                 background-size: contain;
-                box-shadow: 0 0 2em 0.6em rgba(0,0,0,0.2);
+                box-shadow: 0 0 1px 2px rgba(0,0,0,0.2);
                 transition: background-color 0.3s ease-out;
             }
             .ocsurl-dialog-close-button:hover {
