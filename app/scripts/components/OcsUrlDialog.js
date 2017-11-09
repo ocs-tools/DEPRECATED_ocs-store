@@ -83,22 +83,23 @@ export default class OcsUrlDialog extends Component {
         return `
             .ocsurl-dialog-close-button {
                 position: relative;
-                left: 230px;
+                left: 226px;
                 top: 18px;
                 display: inline-block;
                 width: 32px;
                 height: 32px;
-                border: 3px solid rgba(0,0,0,0.9);
+                border: none;
                 border-radius: 32px;
                 outline: none;
-                background-color: #eeeeee;
+                background-color: #ffffff;
                 background-position: center center;
                 background-repeat: no-repeat;
                 background-size: contain;
+                box-shadow: 0 0 2em 0.6em rgba(0,0,0,0.2);
                 transition: background-color 0.3s ease-out;
             }
             .ocsurl-dialog-close-button:hover {
-                background-color: #c7c7c7;
+                background-color: #eeeeee;
             }
 
             .ocsurl-dialog-content {
