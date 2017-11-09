@@ -24,11 +24,11 @@
   "dependencies": {
     "electron-config": "1.0.0",
     "import-export": "1.0.1",
-    "request": "2.81.0",
+    "request": "2.83.0",
     "js": "git://github.com/akiraohgaki/js.git#4fd4592fe0b4d4a107fbda6c1633f8bcd4e152b4"
   },
   "devDependencies": {
-    "electron": "1.7.5",
-    "electron-packager": "8.7.2"
+    "electron": "1.7.9",
+    "electron-packager": "9.1.0"
   }
 }
