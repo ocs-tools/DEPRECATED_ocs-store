@@ -10,8 +10,8 @@ branches:
 script:
   - mntdir='/mnt/ocsstore'
   - docker run --rm -v $(pwd):${mntdir} ubuntu:16.04 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh ubuntu"
-  - docker run --rm -v $(pwd):${mntdir} fedora:20 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh fedora"
-  - docker run --rm -v $(pwd):${mntdir} opensuse:42.2 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh opensuse"
+  - docker run --rm -v $(pwd):${mntdir} fedora:22 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh fedora"
+  - docker run --rm -v $(pwd):${mntdir} opensuse:42.3 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh opensuse"
   - docker run --rm -v $(pwd):${mntdir} base/archlinux:latest /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh archlinux"
   #- docker run --rm -v $(pwd):${mntdir} ubuntu:16.04 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh snap"
   #- docker run --rm -v $(pwd):${mntdir} ubuntu:16.04 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh flatpak"
