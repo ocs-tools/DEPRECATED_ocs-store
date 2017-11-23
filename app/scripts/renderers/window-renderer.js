@@ -311,7 +311,7 @@ import Root from '../components/Root.js';
                 if (data.versioncode > packageMeta._versioncode) {
                     console.log('Found newer version');
 
-                    if (process.env.APPIMAGE == path.join(remote.app.getPath('home'), '.local', 'bin', 'ocsstore.AppImage')) {
+                    if (process.env.APPIMAGE === path.join(remote.app.getPath('home'), '.local', 'bin', 'ocsstore.AppImage')) {
                         for (const releasefile of data.releasefiles) {
                             if (releasefile.url.toLowerCase().endsWith('x86_64.appimage')) {
                                 const dirPath = path.join(remote.app.getPath('home'), '.cache', 'ocsstore');
