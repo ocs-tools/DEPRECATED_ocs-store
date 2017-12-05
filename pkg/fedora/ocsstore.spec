@@ -9,7 +9,7 @@ URL: https://github.com/opendesktop/ocsstore
 #Source0: https://github.com/opendesktop/ocsstore/archive/release-%{version}.tar.gz
 Source0: %{name}.tar.gz
 
-Requires: GConf2, libXScrnSaver, qt5-qtbase >= 5.3.0, qt5-qtbase-gui >= 5.3.0, qt5-qtwebsockets >= 5.3.0, curl
+Requires: GConf2, libXScrnSaver, qt5-qtbase >= 5.3.0, qt5-qtbase-gui >= 5.3.0, qt5-qtwebsockets >= 5.3.0
 BuildRequires: curl, git, nodejs, npm, rpm-build, make, automake, gcc, gcc-c++, libtool, qt5-qtbase-devel >= 5.3.0, qt5-qtwebsockets-devel >= 5.3.0, cmake, openssl-devel, libcurl-devel, libXpm-devel
 
 %description

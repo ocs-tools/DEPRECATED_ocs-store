@@ -7,6 +7,6 @@ Standards-Version: 3.9.4
 
 Package: ocsstore
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libgconf-2-4, libxss1, libqt5gui5 (>= 5.3.0), libqt5websockets5 (>= 5.3.0), libqt5dbus5 (>= 5.3.0), curl
+Depends: ${shlibs:Depends}, ${misc:Depends}, libgconf-2-4, libxss1, libqt5gui5 (>= 5.3.0), libqt5websockets5 (>= 5.3.0), libqt5dbus5 (>= 5.3.0)
 Description: OCS-Store
  OCS-compatible Electron-based frontend.
