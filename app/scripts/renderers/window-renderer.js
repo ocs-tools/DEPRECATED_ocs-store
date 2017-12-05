@@ -22,6 +22,7 @@ import Root from '../components/Root.js';
     const mainWebview = root.mainArea.browsePage.element.querySelector('[data-webview="main"]');
 
     let isStartup = true;
+    const updateCheckAfter = 24; // Hours
 
     let installTypes = {};
     let installedItems = {};
@@ -64,10 +65,10 @@ import Root from '../components/Root.js';
             }
             else if (data.id === 'init' && data.func === 'ConfigHandler::getUsrConfigApplication') {
                 if (!data.data[0].update_checked_at
-                    || (data.data[0].update_checked_at + (1000 * 60 * 60 * 24)) < new Date().getTime() // Daily update check, for now
+                    || (data.data[0].update_checked_at + (1000 * 60 * 60 * updateCheckAfter)) < new Date().getTime()
                 ) {
-                    //sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
-                    sendWebSocketMessage('', 'UpdateHandler::checkAll', []);
+                    sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
+                    sendWebSocketMessage('', 'UpdateHandler::checkAll', []); // This will get the installedItems data again later
                 }
                 else {
                     sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
