@@ -322,7 +322,7 @@ import Root from '../components/Root.js';
         });
 
         statusManager.registerAction('check-self-update', (resolve, reject) => {
-            console.log('Checking for update');
+            console.log('Checking for self update');
 
             fetch(packageMeta._releaseMeta)
             .then((response) => {
