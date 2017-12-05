@@ -79,6 +79,17 @@ import Root from '../components/Root.js';
             }
             else if (data.func === 'ConfigHandler::getUsrConfigUpdateAvailableItems') {
                 updateAvailableItems = data.data[0];
+
+                root.toolBar.update({
+                    backAction: root.toolBar.state.backAction,
+                    forwardAction: root.toolBar.state.forwardAction,
+                    homeAction: root.toolBar.state.homeAction,
+                    collectionAction: root.toolBar.state.collectionAction,
+                    indicator: root.toolBar.state.indicator,
+                    upgrade: root.toolBar.state.upgrade,
+                    updateAvailable: Object.keys(updateAvailableItems).length ? true : false
+                });
+
                 sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
             }
             else if (data.func === 'ConfigHandler::getUsrConfigInstalledItems') {
@@ -107,7 +118,8 @@ import Root from '../components/Root.js';
                     homeAction: 'browse-page',
                     collectionAction: 'collection-page',
                     indicator: root.toolBar.state.indicator,
-                    upgrade: root.toolBar.state.upgrade
+                    upgrade: root.toolBar.state.upgrade,
+                    updateAvailable: root.toolBar.state.updateAvailable
                 });
 
                 root.mainArea.installedItemsPage.update({
@@ -245,7 +257,8 @@ import Root from '../components/Root.js';
                 homeAction: 'start-page',
                 collectionAction: 'collection-page',
                 indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade
+                upgrade: root.toolBar.state.upgrade,
+                updateAvailable: root.toolBar.state.updateAvailable
             });
 
             root.mainArea.changePage('browsePage');
@@ -282,7 +295,8 @@ import Root from '../components/Root.js';
                 homeAction: 'browse-page',
                 collectionAction: 'collection-page',
                 indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade
+                upgrade: root.toolBar.state.upgrade,
+                updateAvailable: root.toolBar.state.updateAvailable
             });
 
             root.mainArea.changePage('collectionPage');
@@ -316,7 +330,8 @@ import Root from '../components/Root.js';
                 homeAction: 'browse-page',
                 collectionAction: 'collection-page',
                 indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade
+                upgrade: root.toolBar.state.upgrade,
+                updateAvailable: root.toolBar.state.updateAvailable
             });
 
             root.mainArea.changePage('upgradePage');

@@ -21,10 +21,17 @@ export default class InstalledItemsPage extends Component {
                 const previewPic = `file://${electron.remote.app.getPath('userData')}/previewpic/${btoa(installedItem.url)}`;
                 for (const file of installedItem.files) {
                     totalFiles++;
+
                     const filePath = `${this.state.installTypes[type].destination}/${file}`;
                     const openFileParams = JSON.stringify({path: filePath});
                     const applyThemeParams = JSON.stringify({path: filePath, installType: type});
                     const removeFileParams = JSON.stringify({itemKey: itemKey});
+
+                    let openFileButtonLabel = 'label';
+                    if (this.state.updateAvailableItems[itemKey]) {
+                        openFileButtonLabel = 'label-important';
+                    }
+
                     let applyCell = '';
                     if (this.state.isApplicableType) {
                         applyCell = `
@@ -33,10 +40,11 @@ export default class InstalledItemsPage extends Component {
                             </td>
                         `;
                     }
+
                     list += `
                         <tr>
                         <td class="open-file-cell">
-                        <a href="#" data-dispatch="open-file" data-params='${openFileParams}'>
+                        <a class="${openFileButtonLabel}" href="#" data-dispatch="open-file" data-params='${openFileParams}'>
                         <img src="${previewPic}" width="48" height="48" class="previewpic">
                         ${file}
                         </a>
@@ -98,7 +106,8 @@ export default class InstalledItemsPage extends Component {
                 vertical-align: middle;
             }
 
-            .installeditems-page-content .installeditems a {
+            .installeditems-page-content .installeditems .label,
+            .installeditems-page-content .installeditems .label-important {
                 display: block;
                 padding: 0.6em;
                 background-color: transparent;
@@ -106,8 +115,13 @@ export default class InstalledItemsPage extends Component {
                 text-decoration: none;
                 transition: background-color 0.3s ease-out;
             }
-            .installeditems-page-content .installeditems a:hover,
-            .installeditems-page-content .installeditems a:active {
+            .installeditems-page-content .installeditems .label-important {
+                color: #cc0000;
+            }
+            .installeditems-page-content .installeditems .label:hover,
+            .installeditems-page-content .installeditems .label:active,
+            .installeditems-page-content .installeditems .label-important:hover,
+            .installeditems-page-content .installeditems .label-important:active {
                 background-color: #e0e0e0;
             }
 

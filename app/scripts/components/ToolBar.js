@@ -14,7 +14,8 @@ export default class ToolBar extends Component {
                 homeAction: '',
                 collectionAction: '',
                 indicator: false,
-                upgrade: false
+                upgrade: false,
+                updateAvailable: false
             };
         }
     }
@@ -24,12 +25,13 @@ export default class ToolBar extends Component {
         const forwardButtonAttr = this.state.forwardAction ? `data-dispatch="${this.state.forwardAction}"` : 'disabled';
         const homeButtonAttr = this.state.homeAction ? `data-dispatch="${this.state.homeAction}"` : 'disabled';
         const collectionButtonAttr = this.state.collectionAction ? `data-dispatch="${this.state.collectionAction}"` : 'disabled';
+        const collectionButtonLabel = this.state.updateAvailable ? 'label-important' : 'label';
 
         return `
             <button class="toolbar-button icon-chevron-left" ${backButtonAttr}></button>
             <button class="toolbar-button icon-chevron-right" ${forwardButtonAttr}></button>
             <button class="toolbar-button icon-home label" ${homeButtonAttr}>Browse</button>
-            <button class="toolbar-button icon-folder label" ${collectionButtonAttr}>Installed</button>
+            <button class="toolbar-button icon-folder ${collectionButtonLabel}" ${collectionButtonAttr}>Installed</button>
             <span class="toolbar-indicator icon-loading"></span>
             <span class="toolbar-spacer"></span>
             <select class="toolbar-select" name="startPage">
@@ -87,10 +89,14 @@ export default class ToolBar extends Component {
                 color: #222222;
             }
 
-            .toolbar-button.label {
+            .toolbar-button.label,
+            .toolbar-button.label-important {
                 width: auto;
                 padding: 0 4px 0 36px;
                 background-position: 4px center;
+            }
+            .toolbar-button.label-important {
+                color: #cc0000;
             }
 
             .toolbar-button[disabled] {

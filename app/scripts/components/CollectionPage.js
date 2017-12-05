@@ -16,20 +16,26 @@ export default class CollectionPage extends Component {
             if (!installTypes[type]) {
                 installTypes[type] = {
                     name: this.state.installTypes[type].name,
-                    files: 0
+                    files: 0,
+                    updateAvailable: false
                 };
             }
             installTypes[type].files += this.state.installedItems[key].files.length;
             totalFiles += this.state.installedItems[key].files.length;
+            if (this.state.updateAvailableItems[key]) {
+                installTypes[type].updateAvailable = true;
+            }
         }
 
         let list = '';
         for (const type of Object.keys(installTypes)) {
             const params = JSON.stringify({installType: type});
+            const installedItemsButtonLabel = installTypes[type].updateAvailable ? 'label-important' : 'label';
+
             list += `
                 <tr>
                 <td>
-                <a href="#" data-dispatch="installed-items-page" data-params='${params}'>
+                <a class="${installedItemsButtonLabel}" href="#" data-dispatch="installed-items-page" data-params='${params}'>
                 ${installTypes[type].name}
                 <span class="badge">${installTypes[type].files}</span>
                 </a>
@@ -73,7 +79,8 @@ export default class CollectionPage extends Component {
                 border-top: 1px solid rgba(0,0,0,0.1);
             }
 
-            .collection-page-content .installtypes a {
+            .collection-page-content .installtypes .label,
+            .collection-page-content .installtypes .label-important {
                 display: block;
                 padding: 0.6em;
                 background-color: transparent;
@@ -81,8 +88,13 @@ export default class CollectionPage extends Component {
                 text-decoration: none;
                 transition: background-color 0.3s ease-out;
             }
-            .collection-page-content .installtypes a:hover,
-            .collection-page-content .installtypes a:active {
+            .collection-page-content .installtypes .label-important {
+                color: #cc0000;
+            }
+            .collection-page-content .installtypes .label:hover,
+            .collection-page-content .installtypes .label:active,
+            .collection-page-content .installtypes .label-important:hover,
+            .collection-page-content .installtypes .label-important:active {
                 background-color: #e0e0e0;
             }
 
