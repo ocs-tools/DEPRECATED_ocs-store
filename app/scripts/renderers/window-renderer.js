@@ -208,7 +208,15 @@ import Root from '../components/Root.js';
                 if (data.data[0].status !== 'success_uninstall') {
                     console.error(data.data[0].message);
                 }
-                sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
+                //sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
+                sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+            }
+            else if (data.func === 'UpdateHandler::updateStarted') {
+            }
+            else if (data.func === 'UpdateHandler::updateFinished') {
+                sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+            }
+            else if (data.func === 'UpdateHandler::updateProgress') {
             }
         };
 
@@ -313,6 +321,10 @@ import Root from '../components/Root.js';
         statusManager.registerAction('open-file', (resolve, reject, params) => {
             const url = `file://${params.path}`;
             sendWebSocketMessage(url, 'SystemHandler::openUrl', [url]);
+        });
+
+        statusManager.registerAction('update-item', (resolve, reject, params) => {
+            sendWebSocketMessage(params.path, 'UpdateHandler::update', [params.itemKey]);
         });
 
         statusManager.registerAction('apply-theme', (resolve, reject, params) => {

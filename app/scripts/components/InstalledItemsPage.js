@@ -24,12 +24,17 @@ export default class InstalledItemsPage extends Component {
 
                     const filePath = `${this.state.installTypes[type].destination}/${file}`;
                     const openFileParams = JSON.stringify({path: filePath});
+                    const updateItemParams = JSON.stringify({itemKey: itemKey});
                     const applyThemeParams = JSON.stringify({path: filePath, installType: type});
                     const removeFileParams = JSON.stringify({itemKey: itemKey});
 
                     let openFileButtonLabel = 'label';
+                    let updateButton = '';
                     if (this.state.updateAvailableItems[itemKey]) {
                         openFileButtonLabel = 'label-important';
+                        updateButton = `
+                            <button data-dispatch="update-item" data-params='${updateItemParams}'>Update</button>
+                        `;
                     }
 
                     let applyCell = '';
@@ -48,6 +53,9 @@ export default class InstalledItemsPage extends Component {
                         <img src="${previewPic}" width="48" height="48" class="previewpic">
                         ${file}
                         </a>
+                        </td>
+                        <td class="update-item-cell">
+                        ${updateButton}
                         </td>
                         ${applyCell}
                         <td class="remove-file-cell">
