@@ -22,8 +22,10 @@ import Root from '../components/Root.js';
     const mainWebview = root.mainArea.browsePage.element.querySelector('[data-webview="main"]');
 
     let isStartup = true;
-    let installTypes = null;
-    let installedItems = null;
+
+    let installTypes = {};
+    let installedItems = {};
+    let updateAvailableItems = {};
 
     function setup() {
         document.title = packageMeta.productName;
@@ -36,13 +38,14 @@ import Root from '../components/Root.js';
         if (isStartup) {
             root.mainArea.startupDialog.show();
         }
+
         statusManager.dispatch('browse-page');
     }
 
     function setupWebSocket() {
         webSocket.onopen = () => {
             console.log('WebSocket open');
-            sendWebSocketMessage('', 'ConfigHandler::getAppConfigInstallTypes', []);
+            sendWebSocketMessage('init', 'ConfigHandler::getAppConfigInstallTypes', []);
         };
 
         webSocket.onclose = () => {
@@ -55,8 +58,26 @@ import Root from '../components/Root.js';
             console.log('WebSocket message received');
             console.log(data);
 
-            if (data.func === 'ConfigHandler::getAppConfigInstallTypes') {
+            if (data.id === 'init' && data.func === 'ConfigHandler::getAppConfigInstallTypes') {
                 installTypes = data.data[0];
+                sendWebSocketMessage('init', 'ConfigHandler::getUsrConfigApplication', []);
+            }
+            else if (data.id === 'init' && data.func === 'ConfigHandler::getUsrConfigApplication') {
+                if (!data.data[0].update_checked_at
+                    || (data.data[0].update_checked_at + (1000 * 60 * 60 * 24)) < new Date().getTime() // Daily update check, for now
+                ) {
+                    //sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
+                    sendWebSocketMessage('', 'UpdateHandler::checkAll', []);
+                }
+                else {
+                    sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+                }
+            }
+            else if (data.func === 'UpdateHandler::checkAllFinished') {
+                sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+            }
+            else if (data.func === 'ConfigHandler::getUsrConfigUpdateAvailableItems') {
+                updateAvailableItems = data.data[0];
                 sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
             }
             else if (data.func === 'ConfigHandler::getUsrConfigInstalledItems') {
@@ -64,7 +85,8 @@ import Root from '../components/Root.js';
 
                 root.mainArea.collectionPage.update({
                     installTypes: installTypes,
-                    installedItems: installedItems
+                    installedItems: installedItems,
+                    updateAvailableItems: updateAvailableItems
                 });
 
                 if (root.mainArea.installedItemsPage.state) {
@@ -72,7 +94,8 @@ import Root from '../components/Root.js';
                         installType: root.mainArea.installedItemsPage.state.installType,
                         isApplicableType: root.mainArea.installedItemsPage.state.isApplicableType,
                         installTypes: installTypes,
-                        installedItems: installedItems
+                        installedItems: installedItems,
+                        updateAvailableItems: updateAvailableItems
                     });
                 }
             }
@@ -90,7 +113,8 @@ import Root from '../components/Root.js';
                     installType: data.id,
                     isApplicableType: data.data[0],
                     installTypes: installTypes,
-                    installedItems: installedItems
+                    installedItems: installedItems,
+                    updateAvailableItems: updateAvailableItems
                 });
 
                 root.mainArea.changePage('installedItemsPage');
@@ -297,7 +321,7 @@ import Root from '../components/Root.js';
             root.mainArea.changePage('upgradePage');
         });
 
-        statusManager.registerAction('check-update', (resolve, reject) => {
+        statusManager.registerAction('check-self-update', (resolve, reject) => {
             console.log('Checking for update');
 
             fetch(packageMeta._releaseMeta)
@@ -341,12 +365,12 @@ import Root from '../components/Root.js';
             });
         });
 
-        statusManager.registerView('check-update', (state) => {
+        statusManager.registerView('check-self-update', (state) => {
             root.toolBar.showUpgradeButton();
             root.mainArea.upgradePage.update(state);
         });
 
-        statusManager.dispatch('check-update');
+        statusManager.dispatch('check-self-update');
     }
 
     function setupWebView() {
