@@ -5,7 +5,7 @@ srcdir = .
 
 build_tmpdir = ./build_tmp
 ocsmanager_build = default
-ocsmanager_version = 0.4.4
+ocsmanager_version = 0.5.0
 
 DESTDIR =
 prefix = /usr/local

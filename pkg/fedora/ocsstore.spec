@@ -10,7 +10,7 @@ URL: https://github.com/opendesktop/ocsstore
 Source0: %{name}.tar.gz
 
 Requires: GConf2, libXScrnSaver, qt5-qtbase >= 5.3.0, qt5-qtbase-gui >= 5.3.0, qt5-qtwebsockets >= 5.3.0
-BuildRequires: make, automake, gcc, gcc-c++, libtool, qt5-qtbase-devel >= 5.3.0, qt5-qtwebsockets-devel >= 5.3.0, git, nodejs, npm, rpm-build
+BuildRequires: curl, git, nodejs, npm, rpm-build, make, automake, gcc, gcc-c++, libtool, qt5-qtbase-devel >= 5.3.0, qt5-qtwebsockets-devel >= 5.3.0, cmake, openssl-devel, libcurl-devel, libXpm-devel
 
 %description
 OCS-compatible Electron-based frontend.

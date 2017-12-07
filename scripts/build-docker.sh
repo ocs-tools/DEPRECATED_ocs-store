@@ -38,9 +38,10 @@ transfer_file() {
 build_ubuntu() {
     # docker-image: ubuntu:16.04
     apt update -qq
+    apt -y install curl git nodejs npm devscripts debhelper fakeroot
+
     apt -y install build-essential qt5-default libqt5websockets5-dev
-    apt -y install git nodejs npm devscripts debhelper fakeroot
-    apt -y install curl
+    apt -y install cmake libssl-dev libcurl4-gnutls-dev libxpm-dev
 
     install_nodejs
 
@@ -54,15 +55,11 @@ build_ubuntu() {
 }
 
 build_fedora() {
-    # docker-image: fedora:20
-    yum -y distro-sync
-    yum -y install make automake gcc gcc-c++ libtool qt5-qtbase-devel qt5-qtwebsockets-devel
-    yum -y install git nodejs npm rpm-build
-    yum -y install curl
     # docker-image: fedora:22
-    #dnf -y install make automake gcc gcc-c++ libtool qt5-qtbase-devel qt5-qtwebsockets-devel
-    #dnf -y install git nodejs npm rpm-build
-    #dnf -y install curl
+    dnf -y install curl git nodejs npm rpm-build
+
+    dnf -y install make automake gcc gcc-c++ libtool qt5-qtbase-devel qt5-qtwebsockets-devel
+    dnf -y install cmake openssl-devel libcurl-devel libXpm-devel
 
     ln -sf /usr/bin/qmake-qt5 /usr/bin/qmake
 
@@ -78,11 +75,12 @@ build_fedora() {
 }
 
 build_opensuse() {
-    # docker-image: opensuse:42.2
+    # docker-image: opensuse:42.3
     zypper --non-interactive refresh
+    zypper --non-interactive install curl git nodejs npm which rpm-build
+
     zypper --non-interactive install make automake gcc gcc-c++ libtool libqt5-qtbase-devel libQt5Gui-devel libqt5-qtwebsockets-devel libQt5DBus-devel
-    zypper --non-interactive install git nodejs npm rpm-build
-    zypper --non-interactive install curl
+    zypper --non-interactive install cmake libopenssl-devel libcurl-devel libXpm-devel
 
     ln -sf /usr/bin/qmake-qt5 /usr/bin/qmake
 
@@ -100,9 +98,12 @@ build_opensuse() {
 build_archlinux() {
     # docker-image: base/archlinux:latest
     pacman -Syu --noconfirm
-    pacman -S --noconfirm base-devel gconf libxss qt5-base qt5-websockets
-    pacman -S --noconfirm git nodejs npm
-    pacman -S --noconfirm curl
+    pacman -S --noconfirm curl git nodejs npm
+
+    pacman -S --noconfirm base-devel qt5-base qt5-websockets
+    pacman -S --noconfirm cmake openssl libcurl-gnutls libxpm
+
+    pacman -S --noconfirm gconf libxss
 
     install_nodejs
 
@@ -126,11 +127,13 @@ build_flatpak() {
 build_appimage() {
     # docker-image: ubuntu:17.10
     apt update -qq
+    apt -y install curl git nodejs npm
+
     apt -y install build-essential qt5-default libqt5websockets5-dev
-    apt -y install libssl1.0.0 zlib1g
+    apt -y install cmake libssl-dev libcurl4-gnutls-dev libxpm-dev
+
     apt -y install libgconf-2-4 libxss1
-    apt -y install git nodejs npm
-    apt -y install curl
+    apt -y install libssl1.0.0 zlib1g
 
     install_nodejs
 
