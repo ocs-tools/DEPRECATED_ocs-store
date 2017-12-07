@@ -1,6 +1,6 @@
 Summary: OCS-Store
 Name: ocsstore
-Version: 2.2.1
+Version: 2.3.0
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
@@ -38,6 +38,12 @@ make DESTDIR="%{buildroot}" prefix="/usr" install
 rm -rf %{buildroot}
 
 %changelog
+* Thu Dec 07 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.3.0-1
+- Update node.js, Electron, and modules
+- Update ocs-manager
+- Add close button to dialog
+- Integrate libappimageupdate
+
 * Mon Sep 25 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.2.1-1
 - Support AppImage
 - Fix for app launcher

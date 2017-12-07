@@ -1,7 +1,7 @@
 # Maintainer: Akira Ohgaki <akiraohgaki@gmail.com>
 
 pkgname='ocsstore'
-pkgver='2.2.1'
+pkgver='2.3.0'
 pkgrel='1'
 pkgdesc='OCS-compatible Electron-based frontend.'
 arch=('i686' 'x86_64')

@@ -1,3 +1,12 @@
+ocsstore (2.3.0-0ubuntu1) xenial; urgency=low
+
+  * Update node.js, Electron, and modules
+  * Update ocs-manager
+  * Add close button to dialog
+  * Integrate libappimageupdate
+
+ -- Akira Ohgaki <akiraohgaki@gmail.com>  Thu, 07 Dec 2017 17:30:50 +0000
+
 ocsstore (2.2.1-0ubuntu1) xenial; urgency=low
 
   * Support AppImage
