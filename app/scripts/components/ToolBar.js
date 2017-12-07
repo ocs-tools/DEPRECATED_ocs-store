@@ -25,13 +25,13 @@ export default class ToolBar extends Component {
         const forwardButtonAttr = this.state.forwardAction ? `data-dispatch="${this.state.forwardAction}"` : 'disabled';
         const homeButtonAttr = this.state.homeAction ? `data-dispatch="${this.state.homeAction}"` : 'disabled';
         const collectionButtonAttr = this.state.collectionAction ? `data-dispatch="${this.state.collectionAction}"` : 'disabled';
-        const collectionButtonLabel = this.state.updateAvailable ? 'label-important' : 'label';
+        const collectionButtonImportant = this.state.updateAvailable ? 'important' : '';
 
         return `
             <button class="toolbar-button icon-chevron-left" ${backButtonAttr}></button>
             <button class="toolbar-button icon-chevron-right" ${forwardButtonAttr}></button>
             <button class="toolbar-button icon-home label" ${homeButtonAttr}>Browse</button>
-            <button class="toolbar-button icon-folder ${collectionButtonLabel}" ${collectionButtonAttr}>Installed</button>
+            <button class="toolbar-button icon-folder label ${collectionButtonImportant}" ${collectionButtonAttr}>Installed</button>
             <span class="toolbar-indicator icon-loading"></span>
             <span class="toolbar-spacer"></span>
             <select class="toolbar-select" name="startPage">
@@ -43,7 +43,7 @@ export default class ToolBar extends Component {
             <option value="https://www.box-look.org/">box-look.org</option>
             <option value="https://www.enlightenment-themes.org/">enlightenment-themes.org</option>
             </select>
-            <button class="toolbar-button icon-info" data-dispatch="upgrade-page"></button>
+            <button class="toolbar-button icon-info important" data-dispatch="upgrade-page"></button>
             <button class="toolbar-button icon-menu" data-dispatch="side-panel"></button>
         `;
     }
@@ -89,26 +89,23 @@ export default class ToolBar extends Component {
                 color: #222222;
             }
 
-            .toolbar-button.label,
-            .toolbar-button.label-important {
+            .toolbar-button.label {
                 width: auto;
                 padding: 0 4px 0 36px;
                 background-position: 4px center;
-            }
-            .toolbar-button.label-important {
-                color: #cc0000;
             }
 
             .toolbar-button[disabled] {
                 opacity: 0.5;
             }
 
-            .toolbar-button[data-dispatch="upgrade-page"] {
-                background-color: #ec407a;
+            .toolbar-button.important {
+                color: #ffffff;
+                background-color: #03a9f4;
             }
-            .toolbar-button[data-dispatch="upgrade-page"]:hover,
-            .toolbar-button[data-dispatch="upgrade-page"]:active {
-                background-color: #d81b60;
+            .toolbar-button.important:hover,
+            .toolbar-button.important:active {
+                background-color: #40b9ee;
             }
 
             .toolbar-indicator {

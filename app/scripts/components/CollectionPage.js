@@ -30,12 +30,12 @@ export default class CollectionPage extends Component {
         let list = '';
         for (const type of Object.keys(installTypes)) {
             const params = JSON.stringify({installType: type});
-            const installedItemsButtonLabel = installTypes[type].updateAvailable ? 'label-important' : 'label';
+            const listItemImportant = installTypes[type].updateAvailable ? 'important' : '';
 
             list += `
                 <tr>
                 <td>
-                <a class="${installedItemsButtonLabel}" href="#" data-dispatch="installed-items-page" data-params='${params}'>
+                <a class="list-item ${listItemImportant}" href="#" data-dispatch="installed-items-page" data-params='${params}'>
                 ${installTypes[type].name}
                 <span class="badge">${installTypes[type].files}</span>
                 </a>
@@ -79,8 +79,7 @@ export default class CollectionPage extends Component {
                 border-top: 1px solid rgba(0,0,0,0.1);
             }
 
-            .collection-page-content .installtypes .label,
-            .collection-page-content .installtypes .label-important {
+            .collection-page-content .installtypes .list-item {
                 display: block;
                 padding: 0.6em;
                 background-color: transparent;
@@ -88,14 +87,13 @@ export default class CollectionPage extends Component {
                 text-decoration: none;
                 transition: background-color 0.3s ease-out;
             }
-            .collection-page-content .installtypes .label-important {
-                color: #cc0000;
-            }
-            .collection-page-content .installtypes .label:hover,
-            .collection-page-content .installtypes .label:active,
-            .collection-page-content .installtypes .label-important:hover,
-            .collection-page-content .installtypes .label-important:active {
+            .collection-page-content .installtypes .list-item:hover,
+            .collection-page-content .installtypes .list-item:active {
                 background-color: #e0e0e0;
+            }
+
+            .collection-page-content .installtypes .list-item.important {
+                color: #03a9f4;
             }
 
             .collection-page-content .badge {

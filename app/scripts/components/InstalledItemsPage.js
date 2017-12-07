@@ -28,10 +28,10 @@ export default class InstalledItemsPage extends Component {
                     const applyThemeParams = JSON.stringify({path: filePath, installType: type});
                     const removeFileParams = JSON.stringify({itemKey: itemKey});
 
-                    let openFileButtonLabel = 'label';
+                    let listItemImportant = '';
                     let updateButton = '';
                     if (this.state.updateAvailableItems[itemKey]) {
-                        openFileButtonLabel = 'label-important';
+                        listItemImportant = 'important';
                         updateButton = `
                             <button data-dispatch="update-item" data-params='${updateItemParams}'>Update</button>
                         `;
@@ -49,7 +49,7 @@ export default class InstalledItemsPage extends Component {
                     list += `
                         <tr>
                         <td class="open-file-cell">
-                        <a class="${openFileButtonLabel}" href="#" data-dispatch="open-file" data-params='${openFileParams}'>
+                        <a class="list-item ${listItemImportant}" href="#" data-dispatch="open-file" data-params='${openFileParams}'>
                         <img src="${previewPic}" width="48" height="48" class="previewpic">
                         ${file}
                         </a>
@@ -114,8 +114,7 @@ export default class InstalledItemsPage extends Component {
                 vertical-align: middle;
             }
 
-            .installeditems-page-content .installeditems .label,
-            .installeditems-page-content .installeditems .label-important {
+            .installeditems-page-content .installeditems .list-item {
                 display: block;
                 padding: 0.6em;
                 background-color: transparent;
@@ -123,14 +122,13 @@ export default class InstalledItemsPage extends Component {
                 text-decoration: none;
                 transition: background-color 0.3s ease-out;
             }
-            .installeditems-page-content .installeditems .label-important {
-                color: #cc0000;
-            }
-            .installeditems-page-content .installeditems .label:hover,
-            .installeditems-page-content .installeditems .label:active,
-            .installeditems-page-content .installeditems .label-important:hover,
-            .installeditems-page-content .installeditems .label-important:active {
+            .installeditems-page-content .installeditems .list-item:hover,
+            .installeditems-page-content .installeditems .list-item:active {
                 background-color: #e0e0e0;
+            }
+
+            .installeditems-page-content .installeditems .list-item.important {
+                color: #03a9f4;
             }
 
             .installeditems-page-content .installeditems button {
