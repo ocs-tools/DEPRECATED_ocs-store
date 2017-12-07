@@ -133,9 +133,9 @@ export default class InstalledItemsPage extends Component {
 
             .installeditems-page-content .installeditems .list-item .update-progress-bar {
                 display: inline-block;
-                width: 300px;
-                height: 18px;
-                margin: 0.2em 0;
+                width: 90%;
+                height: 12px;
+                margin-top: 0.2em;
             }
 
             .installeditems-page-content .installeditems button {
