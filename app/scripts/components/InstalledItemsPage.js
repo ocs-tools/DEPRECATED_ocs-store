@@ -153,34 +153,43 @@ export default class InstalledItemsPage extends Component {
         `;
     }
 
-    updateItemUpdateProgress(itemKey, progress) {
+    disableItemControl(itemKey) {
         const installedItem = this.element.querySelector(`[data-item-key="${itemKey}"]`);
-        const openFileButton = installedItem.querySelector('[data-dispatch="open-file"]');
-        const updateItemButton = installedItem.querySelector('[data-dispatch="update-item"]');
-        const applyThemeButton = installedItem.querySelector('[data-dispatch="apply-theme"]');
-        const removeItemButton = installedItem.querySelector('[data-dispatch="remove-file"]');
 
-        if (openFileButton.hasAttribute('data-dispatch')) {
+        const openFileButton = installedItem.querySelector('[data-dispatch="open-file"]');
+        if (openFileButton && openFileButton.hasAttribute('data-dispatch')) {
             openFileButton.removeAttribute('data-dispatch');
         }
+
+        const updateItemButton = installedItem.querySelector('[data-dispatch="update-item"]');
         if (updateItemButton && !updateItemButton.disabled) {
             updateItemButton.disabled = true;
         }
+
+        const applyThemeButton = installedItem.querySelector('[data-dispatch="apply-theme"]');
         if (applyThemeButton && !applyThemeButton.disabled) {
             applyThemeButton.disabled = true;
         }
-        if (!removeItemButton.disabled) {
+
+        const removeItemButton = installedItem.querySelector('[data-dispatch="remove-file"]');
+        if (removeItemButton && !removeItemButton.disabled) {
             removeItemButton.disabled = true;
         }
+    }
 
-        if (!openFileButton.querySelector('.update-progress-bar')) {
+    updateItemUpdateProgress(itemKey, progress) {
+        disableItemControl(itemKey);
+
+        const listItem = this.element.querySelector(`[data-item-key="${itemKey}"] .list-item`);
+
+        if (!listItem.querySelector('.update-progress-bar')) {
             const progressBar = document.createElement('progress');
             progressBar.classList.add('update-progress-bar');
             progressBar.setAttribute('max', 100);
-            openFileButton.appendChild(progressBar);
+            listItem.appendChild(progressBar);
         }
 
-        openFileButton.querySelector('.update-progress-bar').value = progress;
+        listItem.querySelector('.update-progress-bar').value = progress;
     }
 
 }
