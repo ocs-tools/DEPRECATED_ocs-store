@@ -47,7 +47,7 @@ export default class InstalledItemsPage extends Component {
                     }
 
                     list += `
-                        <tr>
+                        <tr data-item-key="${itemKey}">
                         <td class="open-file-cell">
                         <a class="list-item ${listItemImportant}" href="#" data-dispatch="open-file" data-params='${openFileParams}'>
                         <img src="${previewPic}" width="48" height="48" class="previewpic">
@@ -106,14 +106,6 @@ export default class InstalledItemsPage extends Component {
                 width: 100%;
             }
 
-            .installeditems-page-content .installeditems .previewpic {
-                width: 48px;
-                height: 48px;
-                margin-right: 0.2em;
-                border: 0;
-                vertical-align: middle;
-            }
-
             .installeditems-page-content .installeditems .list-item {
                 display: block;
                 padding: 0.6em;
@@ -131,6 +123,21 @@ export default class InstalledItemsPage extends Component {
                 color: #03a9f4;
             }
 
+            .installeditems-page-content .installeditems .list-item .previewpic {
+                width: 48px;
+                height: 48px;
+                margin-right: 0.2em;
+                border: 0;
+                vertical-align: middle;
+            }
+
+            .installeditems-page-content .installeditems .list-item .update-progress-bar {
+                display: inline-block;
+                width: 300px;
+                height: 18px;
+                margin: 0.2em 0;
+            }
+
             .installeditems-page-content .installeditems button {
                 margin: 0 0.2em;
                 padding: 0.3em 0.5em;
@@ -144,6 +151,36 @@ export default class InstalledItemsPage extends Component {
                 font-size: 80%;
             }
         `;
+    }
+
+    updateItemUpdateProgress(itemKey, progress) {
+        const installedItem = this.element.querySelector(`[data-item-key="${itemKey}"]`);
+        const openFileButton = installedItem.querySelector('[data-dispatch="open-file"]');
+        const updateItemButton = installedItem.querySelector('[data-dispatch="update-item"]');
+        const applyThemeButton = installedItem.querySelector('[data-dispatch="apply-theme"]');
+        const removeItemButton = installedItem.querySelector('[data-dispatch="remove-file"]');
+
+        if (openFileButton.hasAttribute('data-dispatch')) {
+            openFileButton.removeAttribute('data-dispatch');
+        }
+        if (updateItemButton && !updateItemButton.disabled) {
+            updateItemButton.disabled = true;
+        }
+        if (applyThemeButton && !applyThemeButton.disabled) {
+            applyThemeButton.disabled = true;
+        }
+        if (!removeItemButton.disabled) {
+            removeItemButton.disabled = true;
+        }
+
+        if (!openFileButton.querySelector('.update-progress-bar')) {
+            const progressBar = document.createElement('progress');
+            progressBar.classList.add('update-progress-bar');
+            progressBar.setAttribute('max', 100);
+            openFileButton.appendChild(progressBar);
+        }
+
+        openFileButton.querySelector('.update-progress-bar').value = progress;
     }
 
 }

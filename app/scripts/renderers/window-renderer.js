@@ -217,6 +217,7 @@ import Root from '../components/Root.js';
                 sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
             }
             else if (data.func === 'UpdateHandler::updateProgress') {
+                root.mainArea.installedItemsPage.updateItemUpdateProgress(data.data[0], data.data[1]);
             }
         };
 
