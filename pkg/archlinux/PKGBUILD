@@ -3,7 +3,7 @@
 pkgname='ocsstore'
 pkgver='2.3.0'
 pkgrel='1'
-pkgdesc='OCS-compatible Electron-based frontend.'
+pkgdesc='OCS-compatible App as Electron-based frontend.'
 arch=('i686' 'x86_64')
 url='https://github.com/opendesktop/ocsstore'
 license=('GPL3')

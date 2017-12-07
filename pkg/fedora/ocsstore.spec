@@ -13,7 +13,7 @@ Requires: GConf2, libXScrnSaver, qt5-qtbase >= 5.3.0, qt5-qtbase-gui >= 5.3.0, q
 BuildRequires: curl, git, nodejs, npm, rpm-build, make, automake, gcc, gcc-c++, libtool, qt5-qtbase-devel >= 5.3.0, qt5-qtwebsockets-devel >= 5.3.0, cmake, openssl-devel, libcurl-devel, libXpm-devel
 
 %description
-OCS-compatible Electron-based frontend.
+OCS-compatible App as Electron-based frontend.
 
 %prep
 #%%autosetup -n %{name}-release-%{version}

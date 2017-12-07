@@ -4,7 +4,7 @@
   "version": "2.3.0",
   "_versioncode": 10,
   "_releaseMeta": "https://github.com/opendesktop/ocsstore/raw/master/release.json",
-  "description": "OCS-compatible Electron-based frontend.",
+  "description": "OCS-compatible App as Electron-based frontend.",
   "keywords": [
     "OCS",
     "Opendesktop",

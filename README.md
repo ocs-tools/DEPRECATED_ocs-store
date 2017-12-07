@@ -3,7 +3,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Build Status](https://travis-ci.org/opendesktop/ocsstore.svg?branch=master)](https://travis-ci.org/opendesktop/ocsstore)
 
-OCS-compatible Electron-based frontend.
+OCS-compatible App as Electron-based frontend.
 
 Copyright: 2017, Opendesktop.org
 

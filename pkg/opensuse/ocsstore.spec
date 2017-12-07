@@ -13,7 +13,7 @@ Requires: gconf2, libXss1, libQt5Gui5 >= 5.3.0, libQt5WebSockets5 >= 5.3.0, libQ
 BuildRequires: curl, git, nodejs, npm, which, rpm-build, make, automake, gcc, gcc-c++, libtool, libqt5-qtbase-devel >= 5.3.0, libQt5Gui-devel >= 5.3.0, libqt5-qtwebsockets-devel >= 5.3.0, libQt5DBus-devel >= 5.3.0, cmake, libopenssl-devel, libcurl-devel, libXpm-devel
 
 %description
-OCS-compatible Electron-based frontend.
+OCS-compatible App as Electron-based frontend.
 
 %prep
 #%%autosetup -n %{name}-release-%{version}
