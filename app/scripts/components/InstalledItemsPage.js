@@ -178,7 +178,7 @@ export default class InstalledItemsPage extends Component {
     }
 
     updateItemUpdateProgress(itemKey, progress) {
-        disableItemControl(itemKey);
+        this.disableItemControl(itemKey);
 
         const listItem = this.element.querySelector(`[data-item-key="${itemKey}"] .list-item`);
 
