@@ -185,7 +185,7 @@ export default class InstalledItemsPage extends Component {
         if (!listItem.querySelector('.update-progress-bar')) {
             const progressBar = document.createElement('progress');
             progressBar.classList.add('update-progress-bar');
-            progressBar.setAttribute('max', 100);
+            progressBar.setAttribute('max', 1);
             listItem.appendChild(progressBar);
         }
 

@@ -46,7 +46,7 @@ import Root from '../components/Root.js';
     function setupWebSocket() {
         webSocket.onopen = () => {
             console.log('WebSocket open');
-            sendWebSocketMessage('init', 'ConfigHandler::getAppConfigInstallTypes', []);
+            sendWebSocketMessage('init', 'WebSocketServer::serverUrl', []);
         };
 
         webSocket.onclose = () => {
@@ -59,7 +59,10 @@ import Root from '../components/Root.js';
             console.log('WebSocket message received');
             console.log(data);
 
-            if (data.id === 'init' && data.func === 'ConfigHandler::getAppConfigInstallTypes') {
+            if (data.id === 'init' && data.func === 'WebSocketServer::serverUrl') {
+                sendWebSocketMessage('init', 'ConfigHandler::getAppConfigInstallTypes', []);
+            }
+            else if (data.id === 'init' && data.func === 'ConfigHandler::getAppConfigInstallTypes') {
                 installTypes = data.data[0];
                 sendWebSocketMessage('init', 'ConfigHandler::getUsrConfigApplication', []);
             }
@@ -74,7 +77,16 @@ import Root from '../components/Root.js';
                     sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
                 }
             }
+            else if (data.func === 'UpdateHandler::checkAllStarted') {
+                if (!data.data[0]) {
+                    console.error('Item update check failed');
+                    sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+                }
+            }
             else if (data.func === 'UpdateHandler::checkAllFinished') {
+                if (!data.data[0]) {
+                    console.error('Item update check failed');
+                }
                 sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
             }
             else if (data.func === 'ConfigHandler::getUsrConfigUpdateAvailableItems') {
@@ -212,8 +224,14 @@ import Root from '../components/Root.js';
                 sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
             }
             else if (data.func === 'UpdateHandler::updateStarted') {
+                if (!data.data[1]) {
+                    console.error('Item update failed');
+                }
             }
             else if (data.func === 'UpdateHandler::updateFinished') {
+                if (!data.data[1]) {
+                    console.error('Item update failed');
+                }
                 sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
             }
             else if (data.func === 'UpdateHandler::updateProgress') {
