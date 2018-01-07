@@ -2,6 +2,6 @@ build_*/
 node_modules/
 bin/
 out/
-ocsstore
-ocsstore-appimage
-ocsstore-*/
+opendesktop-app
+opendesktop-app-appimage
+opendesktop-app-*/
