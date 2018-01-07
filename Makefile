@@ -1,6 +1,6 @@
 SHELL = /bin/sh
 
-TARGET = ocsstore
+TARGET = opendesktop-app
 srcdir = .
 
 build_tmpdir = ./build_tmp

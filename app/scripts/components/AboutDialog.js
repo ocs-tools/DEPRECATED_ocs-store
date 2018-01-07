@@ -13,7 +13,7 @@ export default class AboutDialog extends Component {
             <div class="about-dialog-content">
 
             <div class="content">
-            <div class="banner icon-ocsstore"></div>
+            <div class="banner icon-opendesktop-app"></div>
             <h1 class="title">${packageMeta.productName}</h1>
             <h3 class="version">Version ${packageMeta.version}</h3>
             <p class="description">${packageMeta.description}</p>
