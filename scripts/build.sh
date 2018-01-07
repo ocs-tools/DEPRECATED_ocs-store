@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PKGNAME='ocsstore'
+PKGNAME='opendesktop-app'
 
 BUILDTYPE=''
 if [ "${1}" ]; then
@@ -18,52 +18,6 @@ SRCARCHIVE="${BUILDDIR}/${PKGNAME}.tar.gz"
 export_srcarchive() {
     filepath="${1}"
     $(cd "${PROJDIR}" && git archive --prefix="${PKGNAME}/" --output="${filepath}" HEAD)
-}
-
-build_ubuntu() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${SRCARCHIVE}"
-
-    tar -xzvf "${SRCARCHIVE}" -C "${BUILDDIR}"
-    cp -r "${PROJDIR}/pkg/ubuntu/debian" "${BUILDDIR}/${PKGNAME}"
-    cd "${BUILDDIR}/${PKGNAME}"
-    debuild -uc -us -b
-}
-
-build_fedora() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${SRCARCHIVE}"
-
-    mkdir "${BUILDDIR}/SOURCES"
-    mkdir "${BUILDDIR}/SPECS"
-    mv "${SRCARCHIVE}" "${BUILDDIR}/SOURCES"
-    cp "${PROJDIR}/pkg/fedora/${PKGNAME}.spec" "${BUILDDIR}/SPECS"
-    rpmbuild --define "_topdir ${BUILDDIR}" -bb "${BUILDDIR}/SPECS/${PKGNAME}.spec"
-}
-
-build_opensuse() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${SRCARCHIVE}"
-
-    mkdir "${BUILDDIR}/SOURCES"
-    mkdir "${BUILDDIR}/SPECS"
-    mv "${SRCARCHIVE}" "${BUILDDIR}/SOURCES"
-    cp "${PROJDIR}/pkg/opensuse/${PKGNAME}.spec" "${BUILDDIR}/SPECS"
-    rpmbuild --define "_topdir ${BUILDDIR}" -bb "${BUILDDIR}/SPECS/${PKGNAME}.spec"
-}
-
-build_archlinux() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${SRCARCHIVE}"
-
-    cp "${PROJDIR}/pkg/archlinux/PKGBUILD" "${BUILDDIR}"
-    cd "${BUILDDIR}"
-    updpkgsums
-    makepkg -s
 }
 
 build_snap() {
@@ -85,21 +39,13 @@ build_appimage() {
     sh appimage.sh
 }
 
-if [ "${BUILDTYPE}" = 'ubuntu' ]; then
-    build_ubuntu
-elif [ "${BUILDTYPE}" = 'fedora' ]; then
-    build_fedora
-elif [ "${BUILDTYPE}" = 'opensuse' ]; then
-    build_opensuse
-elif [ "${BUILDTYPE}" = 'archlinux' ]; then
-    build_archlinux
-elif [ "${BUILDTYPE}" = 'snap' ]; then
+if [ "${BUILDTYPE}" = 'snap' ]; then
     build_snap
 elif [ "${BUILDTYPE}" = 'flatpak' ]; then
     build_flatpak
 elif [ "${BUILDTYPE}" = 'appimage' ]; then
     build_appimage
 else
-    echo "sh $(basename "${0}") [ubuntu|fedora|archlinux|snap|flatpak|appimage]"
+    echo "sh $(basename "${0}") [snap|flatpak|appimage]"
     exit 1
 fi
