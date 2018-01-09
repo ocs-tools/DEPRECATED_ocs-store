@@ -28,7 +28,7 @@
     "js": "git://github.com/akiraohgaki/js.git#4fd4592fe0b4d4a107fbda6c1633f8bcd4e152b4"
   },
   "devDependencies": {
-    "electron": "1.7.9",
-    "electron-packager": "9.1.0"
+    "electron": "1.7.10",
+    "electron-packager": "10.1.1"
   }
 }
