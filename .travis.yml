@@ -12,4 +12,5 @@ script:
   #- docker run --rm -v $(pwd):${mntdir} ubuntu:16.04 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh snap"
   #- docker run --rm -v $(pwd):${mntdir} ubuntu:16.04 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh flatpak"
   - docker run --rm -v $(pwd):${mntdir} ubuntu:16.04 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh appimage"
+  - docker run --rm -v $(pwd):${mntdir} ubuntu:17.10 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh appimage"
   - cat transfer.log
