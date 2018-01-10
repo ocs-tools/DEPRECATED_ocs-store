@@ -10,7 +10,7 @@ const request = require('request');
 const packageMeta = require('../../../package.json');
 const ocsManagerConfig = require('../../configs/ocs-manager.json');
 
-import StatusManager from 'js/StatusManager.js';
+import StatusManager from '../../libs/js/StatusManager.js';
 import Root from '../components/Root.js';
 
 {

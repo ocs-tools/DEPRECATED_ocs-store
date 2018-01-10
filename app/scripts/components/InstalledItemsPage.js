@@ -2,7 +2,7 @@
 
 const electron = require('electron');
 
-import Component from 'js/Component.js';
+import Component from '../../libs/js/Component.js';
 
 export default class InstalledItemsPage extends Component {
 
