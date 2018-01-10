@@ -24,8 +24,7 @@
   "dependencies": {
     "electron-config": "1.0.0",
     "import-export": "1.0.1",
-    "request": "2.83.0",
-    "js": "git+https://github.com/akiraohgaki/js.git#4fd4592fe0b4d4a107fbda6c1633f8bcd4e152b4"
+    "request": "2.83.0"
   },
   "devDependencies": {
     "electron": "1.7.10",
