@@ -1,6 +1,6 @@
 'use strict';
 
-import Component from 'js/Component.js';
+import Component from '../../libs/js/Component.js';
 
 export default class CollectionPage extends Component {
 
@@ -16,20 +16,26 @@ export default class CollectionPage extends Component {
             if (!installTypes[type]) {
                 installTypes[type] = {
                     name: this.state.installTypes[type].name,
-                    files: 0
+                    files: 0,
+                    updateAvailable: false
                 };
             }
             installTypes[type].files += this.state.installedItems[key].files.length;
             totalFiles += this.state.installedItems[key].files.length;
+            if (this.state.updateAvailableItems[key]) {
+                installTypes[type].updateAvailable = true;
+            }
         }
 
         let list = '';
         for (const type of Object.keys(installTypes)) {
             const params = JSON.stringify({installType: type});
+            const listItemImportant = installTypes[type].updateAvailable ? 'important' : '';
+
             list += `
                 <tr>
                 <td>
-                <a href="#" data-dispatch="installed-items-page" data-params='${params}'>
+                <a class="list-item ${listItemImportant}" href="#" data-dispatch="installed-items-page" data-params='${params}'>
                 ${installTypes[type].name}
                 <span class="badge">${installTypes[type].files}</span>
                 </a>
@@ -73,7 +79,7 @@ export default class CollectionPage extends Component {
                 border-top: 1px solid rgba(0,0,0,0.1);
             }
 
-            .collection-page-content .installtypes a {
+            .collection-page-content .installtypes .list-item {
                 display: block;
                 padding: 0.6em;
                 background-color: transparent;
@@ -81,9 +87,13 @@ export default class CollectionPage extends Component {
                 text-decoration: none;
                 transition: background-color 0.3s ease-out;
             }
-            .collection-page-content .installtypes a:hover,
-            .collection-page-content .installtypes a:active {
+            .collection-page-content .installtypes .list-item:hover,
+            .collection-page-content .installtypes .list-item:active {
                 background-color: #e0e0e0;
+            }
+
+            .collection-page-content .installtypes .list-item.important {
+                color: #03a9f4;
             }
 
             .collection-page-content .badge {

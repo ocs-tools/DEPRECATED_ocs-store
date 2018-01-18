@@ -41,7 +41,7 @@ let ocsManager = null;
 
         mainWindow = new BrowserWindow({
             title: packageMeta.productName,
-            icon: `${__dirname}/images/app-icons/ocsstore.png`,
+            icon: `${__dirname}/images/app-icons/opendesktop-app.png`,
             x: windowBounds.x,
             y: windowBounds.y,
             width: windowBounds.width,

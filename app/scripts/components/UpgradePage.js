@@ -1,6 +1,6 @@
 'use strict';
 
-import Component from 'js/Component.js';
+import Component from '../../libs/js/Component.js';
 
 import packageMeta from '../../../package.json';
 
@@ -33,7 +33,7 @@ export default class UpgradePage extends Component {
 
         return `
             <div class="upgrade-page-content">
-            <div class="banner icon-ocsstore"></div>
+            <div class="banner icon-opendesktop-app"></div>
             <h1 class="title">${packageMeta.productName}</h1>
             <h3 class="version">Version ${this.state.versionname} available</h3>
             <p class="description">Current version ${packageMeta.version}</p>

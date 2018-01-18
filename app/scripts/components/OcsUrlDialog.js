@@ -2,7 +2,7 @@
 
 const url = require('url');
 
-import Component from 'js/Component.js';
+import Component from '../../libs/js/Component.js';
 
 export default class OcsUrlDialog extends Component {
 

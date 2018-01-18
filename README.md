@@ -1,11 +1,11 @@
-# OCS-Store
+# Opendesktop App
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Build Status](https://travis-ci.org/opendesktop/ocsstore.svg?branch=master)](https://travis-ci.org/opendesktop/ocsstore)
+[![Build Status](https://travis-ci.org/opendesktop/opendesktop-app.svg?branch=master)](https://travis-ci.org/opendesktop/opendesktop-app)
 
-OCS-compatible Electron-based frontend.
+Opendesktop Official App.
 
-Copyright: 2017, Opendesktop.org
+Copyright: 2017-2018, Opendesktop.org
 
 License: GPL-3+
 

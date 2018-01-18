@@ -1,11 +1,11 @@
 SHELL = /bin/sh
 
-TARGET = ocsstore
+TARGET = opendesktop-app
 srcdir = .
 
 build_tmpdir = ./build_tmp
 ocsmanager_build = default
-ocsmanager_version = 0.4.4
+ocsmanager_tree_ish = release-0.5.2
 
 DESTDIR =
 prefix = /usr/local
@@ -65,7 +65,7 @@ $(TARGET)-linux-x64: ocs-manager_$(ocsmanager_build)
 
 ocs-manager_default:
 	mkdir -p $(build_tmpdir)
-	git clone https://github.com/opendesktop/ocs-manager.git -b release-$(ocsmanager_version) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
+	git clone https://github.com/opendesktop/ocs-manager.git -b $(ocsmanager_tree_ish) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager; \
 		sh ./scripts/import.sh; \
 		qmake ./ocs-manager.pro; \
@@ -74,7 +74,7 @@ ocs-manager_default:
 
 ocs-manager_appimage:
 	mkdir -p $(build_tmpdir)
-	git clone https://github.com/opendesktop/ocs-manager.git -b release-$(ocsmanager_version) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
+	git clone https://github.com/opendesktop/ocs-manager.git -b $(ocsmanager_tree_ish) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager; \
 		sh ./scripts/build.sh appimage
 	install -D -m 755 `find "$(build_tmpdir)/ocs-manager" -type f -name "ocs-manager*.AppImage"` $(srcdir)/bin/ocs-manager

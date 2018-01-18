@@ -1,6 +1,6 @@
 'use strict';
 
-import Component from 'js/Component.js';
+import Component from '../../libs/js/Component.js';
 
 import packageMeta from '../../../package.json';
 
@@ -11,7 +11,7 @@ export default class StartupDialog extends Component {
             <div class="startup-dialog-content">
 
             <div class="content">
-            <div class="banner icon-ocsstore"></div>
+            <div class="banner icon-opendesktop-app"></div>
             <h1 class="title">Welcome to ${packageMeta.productName}</h1>
             <span class="indicator icon-loading">Starting</span>
             </div>

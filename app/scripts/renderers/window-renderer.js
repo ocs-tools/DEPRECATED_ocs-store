@@ -10,7 +10,7 @@ const request = require('request');
 const packageMeta = require('../../../package.json');
 const ocsManagerConfig = require('../../configs/ocs-manager.json');
 
-import StatusManager from 'js/StatusManager.js';
+import StatusManager from '../../libs/js/StatusManager.js';
 import Root from '../components/Root.js';
 
 {
@@ -22,8 +22,11 @@ import Root from '../components/Root.js';
     const mainWebview = root.mainArea.browsePage.element.querySelector('[data-webview="main"]');
 
     let isStartup = true;
-    let installTypes = null;
-    let installedItems = null;
+    const updateCheckAfter = 24; // Hours
+
+    let installTypes = {};
+    let installedItems = {};
+    let updateAvailableItems = {};
 
     function setup() {
         document.title = packageMeta.productName;
@@ -36,13 +39,14 @@ import Root from '../components/Root.js';
         if (isStartup) {
             root.mainArea.startupDialog.show();
         }
+
         statusManager.dispatch('browse-page');
     }
 
     function setupWebSocket() {
         webSocket.onopen = () => {
             console.log('WebSocket open');
-            sendWebSocketMessage('', 'ConfigHandler::getAppConfigInstallTypes', []);
+            sendWebSocketMessage('init', 'WebSocketServer::serverUrl', []);
         };
 
         webSocket.onclose = () => {
@@ -55,8 +59,49 @@ import Root from '../components/Root.js';
             console.log('WebSocket message received');
             console.log(data);
 
-            if (data.func === 'ConfigHandler::getAppConfigInstallTypes') {
+            if (data.id === 'init' && data.func === 'WebSocketServer::serverUrl') {
+                sendWebSocketMessage('init', 'ConfigHandler::getAppConfigInstallTypes', []);
+            }
+            else if (data.id === 'init' && data.func === 'ConfigHandler::getAppConfigInstallTypes') {
                 installTypes = data.data[0];
+                sendWebSocketMessage('init', 'ConfigHandler::getUsrConfigApplication', []);
+            }
+            else if (data.id === 'init' && data.func === 'ConfigHandler::getUsrConfigApplication') {
+                if (!data.data[0].update_checked_at
+                    || (data.data[0].update_checked_at + (1000 * 60 * 60 * updateCheckAfter)) < new Date().getTime()
+                ) {
+                    sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
+                    sendWebSocketMessage('', 'UpdateHandler::checkAll', []); // This will get the installedItems data again later
+                }
+                else {
+                    sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+                }
+            }
+            else if (data.func === 'UpdateHandler::checkAllStarted') {
+                if (!data.data[0]) {
+                    console.error('Item update check failed');
+                    sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+                }
+            }
+            else if (data.func === 'UpdateHandler::checkAllFinished') {
+                if (!data.data[0]) {
+                    console.error('Item update check failed');
+                }
+                sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+            }
+            else if (data.func === 'ConfigHandler::getUsrConfigUpdateAvailableItems') {
+                updateAvailableItems = data.data[0];
+
+                root.toolBar.update({
+                    backAction: root.toolBar.state.backAction,
+                    forwardAction: root.toolBar.state.forwardAction,
+                    homeAction: root.toolBar.state.homeAction,
+                    collectionAction: root.toolBar.state.collectionAction,
+                    indicator: root.toolBar.state.indicator,
+                    upgrade: root.toolBar.state.upgrade,
+                    updateAvailable: Object.keys(updateAvailableItems).length ? true : false
+                });
+
                 sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
             }
             else if (data.func === 'ConfigHandler::getUsrConfigInstalledItems') {
@@ -64,7 +109,8 @@ import Root from '../components/Root.js';
 
                 root.mainArea.collectionPage.update({
                     installTypes: installTypes,
-                    installedItems: installedItems
+                    installedItems: installedItems,
+                    updateAvailableItems: updateAvailableItems
                 });
 
                 if (root.mainArea.installedItemsPage.state) {
@@ -72,7 +118,8 @@ import Root from '../components/Root.js';
                         installType: root.mainArea.installedItemsPage.state.installType,
                         isApplicableType: root.mainArea.installedItemsPage.state.isApplicableType,
                         installTypes: installTypes,
-                        installedItems: installedItems
+                        installedItems: installedItems,
+                        updateAvailableItems: updateAvailableItems
                     });
                 }
             }
@@ -83,14 +130,16 @@ import Root from '../components/Root.js';
                     homeAction: 'browse-page',
                     collectionAction: 'collection-page',
                     indicator: root.toolBar.state.indicator,
-                    upgrade: root.toolBar.state.upgrade
+                    upgrade: root.toolBar.state.upgrade,
+                    updateAvailable: root.toolBar.state.updateAvailable
                 });
 
                 root.mainArea.installedItemsPage.update({
                     installType: data.id,
                     isApplicableType: data.data[0],
                     installTypes: installTypes,
-                    installedItems: installedItems
+                    installedItems: installedItems,
+                    updateAvailableItems: updateAvailableItems
                 });
 
                 root.mainArea.changePage('installedItemsPage');
@@ -171,7 +220,22 @@ import Root from '../components/Root.js';
                 if (data.data[0].status !== 'success_uninstall') {
                     console.error(data.data[0].message);
                 }
-                sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
+                //sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
+                sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+            }
+            else if (data.func === 'UpdateHandler::updateStarted') {
+                if (!data.data[1]) {
+                    console.error('Item update failed');
+                }
+            }
+            else if (data.func === 'UpdateHandler::updateFinished') {
+                if (!data.data[1]) {
+                    console.error('Item update failed');
+                }
+                sendWebSocketMessage('', 'ConfigHandler::getUsrConfigUpdateAvailableItems', []);
+            }
+            else if (data.func === 'UpdateHandler::updateProgress') {
+                root.mainArea.installedItemsPage.updateItemUpdateProgress(data.data[0], data.data[1]);
             }
         };
 
@@ -220,7 +284,8 @@ import Root from '../components/Root.js';
                 homeAction: 'start-page',
                 collectionAction: 'collection-page',
                 indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade
+                upgrade: root.toolBar.state.upgrade,
+                updateAvailable: root.toolBar.state.updateAvailable
             });
 
             root.mainArea.changePage('browsePage');
@@ -257,7 +322,8 @@ import Root from '../components/Root.js';
                 homeAction: 'browse-page',
                 collectionAction: 'collection-page',
                 indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade
+                upgrade: root.toolBar.state.upgrade,
+                updateAvailable: root.toolBar.state.updateAvailable
             });
 
             root.mainArea.changePage('collectionPage');
@@ -276,6 +342,10 @@ import Root from '../components/Root.js';
             sendWebSocketMessage(url, 'SystemHandler::openUrl', [url]);
         });
 
+        statusManager.registerAction('update-item', (resolve, reject, params) => {
+            sendWebSocketMessage(params.path, 'UpdateHandler::update', [params.itemKey]);
+        });
+
         statusManager.registerAction('apply-theme', (resolve, reject, params) => {
             sendWebSocketMessage(params.path, 'DesktopThemeHandler::applyTheme', [params.path, params.installType]);
         });
@@ -291,14 +361,15 @@ import Root from '../components/Root.js';
                 homeAction: 'browse-page',
                 collectionAction: 'collection-page',
                 indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade
+                upgrade: root.toolBar.state.upgrade,
+                updateAvailable: root.toolBar.state.updateAvailable
             });
 
             root.mainArea.changePage('upgradePage');
         });
 
-        statusManager.registerAction('check-update', (resolve, reject) => {
-            console.log('Checking for update');
+        statusManager.registerAction('check-self-update', (resolve, reject) => {
+            console.log('Checking for self update');
 
             fetch(packageMeta._releaseMeta)
             .then((response) => {
@@ -311,11 +382,11 @@ import Root from '../components/Root.js';
                 if (data.versioncode > packageMeta._versioncode) {
                     console.log('Found newer version');
 
-                    if (process.env.APPIMAGE == path.join(remote.app.getPath('home'), '.local', 'bin', 'ocsstore.AppImage')) {
+                    if (process.env.APPIMAGE === path.join(remote.app.getPath('home'), '.local', 'bin', 'opendesktop-app.AppImage')) {
                         for (const releasefile of data.releasefiles) {
                             if (releasefile.url.toLowerCase().endsWith('x86_64.appimage')) {
-                                const dirPath = path.join(remote.app.getPath('home'), '.cache', 'ocsstore');
-                                const filePath = path.join(dirPath, 'ocsstore.AppImage');
+                                const dirPath = path.join(remote.app.getPath('home'), '.cache', 'opendesktop-app');
+                                const filePath = path.join(dirPath, 'opendesktop-app.AppImage');
 
                                 if (!isDirectory(dirPath)) {
                                     fs.mkdirSync(dirPath);
@@ -341,12 +412,12 @@ import Root from '../components/Root.js';
             });
         });
 
-        statusManager.registerView('check-update', (state) => {
+        statusManager.registerView('check-self-update', (state) => {
             root.toolBar.showUpgradeButton();
             root.mainArea.upgradePage.update(state);
         });
 
-        statusManager.dispatch('check-update');
+        statusManager.dispatch('check-self-update');
     }
 
     function setupWebView() {

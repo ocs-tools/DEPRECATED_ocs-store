@@ -1,6 +1,6 @@
 'use strict';
 
-import Component from 'js/Component.js';
+import Component from '../../libs/js/Component.js';
 
 import StatusBarItem from './StatusBarItem.js';
 
