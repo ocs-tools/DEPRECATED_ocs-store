@@ -6,8 +6,8 @@
   "_releaseMeta": "https://github.com/opendesktop/opendesktop-app/raw/master/release.json",
   "description": "Opendesktop Official App.",
   "keywords": [
-    "OCS",
     "Opendesktop",
+    "OCS",
     "Electron"
   ],
   "author": "Opendesktop.org",
@@ -27,7 +27,7 @@
     "request": "2.83.0"
   },
   "devDependencies": {
-    "electron": "1.7.10",
+    "electron": "1.7.11",
     "electron-packager": "10.1.1"
   }
 }
