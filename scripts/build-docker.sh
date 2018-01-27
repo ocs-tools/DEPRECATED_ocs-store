@@ -51,7 +51,7 @@ build_appimage() {
     #apt -y install build-essential qt5-default libqt5websockets5-dev
     #apt -y install cmake libssl-dev libcurl4-gnutls-dev libxpm-dev
     apt -y install libssl1.0.0 zlib1g
-    apt -y install unzip p7zip unrar-free
+    apt -y install unzip p7zip unrar
     apt -y install libgconf-2-4 libxss1
 
     add-apt-repository -y ppa:beineri/opt-qt593-trusty
