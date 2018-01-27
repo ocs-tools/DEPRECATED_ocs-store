@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PKGNAME='opendesktop-app'
-PKGVER='3.0.1'
+PKGVER='3.0.2'
 PKGREL='1'
 
 curl -L -o appimagetool "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"

@@ -167,7 +167,7 @@ import Root from '../components/Root.js';
                                 previewPicUrl = `${data.data[0].metadata.provider}content/previewpic/${data.data[0].metadata.content_id}`;
                             }
                             if (previewPicUrl) {
-                                downloadPreviewPic(previewPicUrl, btoa(data.data[0].metadata.url));
+                                downloadPreviewPic(previewPicUrl, btoa(data.data[0].metadata.url).slice(-255));
                             }
                         }
                     );
@@ -209,7 +209,7 @@ import Root from '../components/Root.js';
                 sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
             }
             else if (data.func === 'ItemHandler::uninstall') {
-                removePreviewPic(btoa(data.id));
+                removePreviewPic(btoa(data.id).slice(-255));
             }
             else if (data.func === 'ItemHandler::uninstallStarted') {
                 if (data.data[0].status !== 'success_uninstallstart') {
