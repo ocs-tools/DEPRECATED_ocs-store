@@ -34,14 +34,6 @@ transfer_file() {
     fi
 }
 
-build_snap() {
-    echo 'Not implemented yet'
-}
-
-build_flatpak() {
-    echo 'Not implemented yet'
-}
-
 build_appimage() {
     # docker-image: ubuntu:14.04
 
@@ -75,13 +67,21 @@ build_appimage() {
     transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.AppImage")"
 }
 
-if [ "${BUILDTYPE}" = 'snap' ]; then
+build_snap() {
+    echo 'Not implemented yet'
+}
+
+build_flatpak() {
+    echo 'Not implemented yet'
+}
+
+if [ "${BUILDTYPE}" = 'appimage' ]; then
+    build_appimage
+elif [ "${BUILDTYPE}" = 'snap' ]; then
     build_snap
 elif [ "${BUILDTYPE}" = 'flatpak' ]; then
     build_flatpak
-elif [ "${BUILDTYPE}" = 'appimage' ]; then
-    build_appimage
 else
-    echo "sh $(basename "${0}") [snap|flatpak|appimage]"
+    echo "sh $(basename "${0}") [appimage|snap|flatpak]"
     exit 1
 fi
