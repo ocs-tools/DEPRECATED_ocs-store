@@ -37,11 +37,11 @@ export default class ToolBar extends Component {
             <select class="toolbar-select" name="startPage">
             <option value="">Choose Startpage</option>
             <option value="https://www.opendesktop.org/">opendesktop.org</option>
-            <option value="https://www.gnome-look.org/">gnome-look.org</option>
+            <option value="https://www.opendesktop.org/s/Gnome">gnome-look.org</option>
             <option value="https://store.kde.org/">store.kde.org</option>
-            <option value="https://www.xfce-look.org/">xfce-look.org</option>
-            <option value="https://www.box-look.org/">box-look.org</option>
-            <option value="https://www.enlightenment-themes.org/">enlightenment-themes.org</option>
+            <option value="https://www.opendesktop.org/s/XFCE">xfce-look.org</option>
+            <option value="https://www.opendesktop.org/s/Window-Managers">box-look.org</option>
+            <option value="https://www.opendesktop.org/s/Enlightenment">enlightenment-themes.org</option>
             </select>
             <button class="toolbar-button icon-info important" data-dispatch="upgrade-page"></button>
             <button class="toolbar-button icon-menu" data-dispatch="side-panel"></button>
