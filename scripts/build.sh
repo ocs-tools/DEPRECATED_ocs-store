@@ -20,14 +20,6 @@ export_srcarchive() {
     $(cd "${PROJDIR}" && git archive --prefix="${PKGNAME}/" --output="${filepath}" HEAD)
 }
 
-build_snap() {
-    echo 'Not implemented yet'
-}
-
-build_flatpak() {
-    echo 'Not implemented yet'
-}
-
 build_appimage() {
     cd "${PROJDIR}"
     mkdir -p "${BUILDDIR}"
@@ -39,13 +31,21 @@ build_appimage() {
     sh appimage.sh
 }
 
-if [ "${BUILDTYPE}" = 'snap' ]; then
+build_snap() {
+    echo 'Not implemented yet'
+}
+
+build_flatpak() {
+    echo 'Not implemented yet'
+}
+
+if [ "${BUILDTYPE}" = 'appimage' ]; then
+    build_appimage
+elif [ "${BUILDTYPE}" = 'snap' ]; then
     build_snap
 elif [ "${BUILDTYPE}" = 'flatpak' ]; then
     build_flatpak
-elif [ "${BUILDTYPE}" = 'appimage' ]; then
-    build_appimage
 else
-    echo "sh $(basename "${0}") [snap|flatpak|appimage]"
+    echo "sh $(basename "${0}") [appimage|snap|flatpak]"
     exit 1
 fi
