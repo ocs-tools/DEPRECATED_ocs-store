@@ -8,7 +8,6 @@ const electronConfig = require('electron-config');
 const request = require('request');
 
 const packageMeta = require('../../../package.json');
-const ocsManagerConfig = require('../../configs/ocs-manager.json');
 
 import StatusManager from '../../libs/js/StatusManager.js';
 import Root from '../components/Root.js';
@@ -16,7 +15,8 @@ import Root from '../components/Root.js';
 {
     const remote = electron.remote;
 
-    const webSocket = new WebSocket(`ws://localhost:${ocsManagerConfig.port}`);
+    const webSocketUrl = require(path.join(remote.app.getPath('appData'), 'ocs-manager', 'application.json')).websocket_url;
+    const webSocket = new WebSocket(webSocketUrl);
     const statusManager = new StatusManager();
     const root = new Root('[data-component="Root"]');
     const mainWebview = root.mainArea.browsePage.element.querySelector('[data-webview="main"]');
