@@ -25,7 +25,7 @@ build_appimage() {
     mkdir -p "${BUILDDIR}"
     export_srcarchive "${SRCARCHIVE}"
 
-    tar -xzvf "${SRCARCHIVE}" -C "${BUILDDIR}"
+    tar -xzf "${SRCARCHIVE}" -C "${BUILDDIR}"
     cp "${PROJDIR}/pkg/appimage/appimage.sh" "${BUILDDIR}/${PKGNAME}"
     cd "${BUILDDIR}/${PKGNAME}"
     sh appimage.sh

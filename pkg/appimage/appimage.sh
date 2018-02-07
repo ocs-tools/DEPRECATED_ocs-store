@@ -4,12 +4,12 @@ PKGNAME='opendesktop-app'
 PKGVER='3.0.3'
 PKGREL='1'
 
-curl -L -o appimagetool "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
-chmod 755 appimagetool
-./appimagetool --appimage-extract
+curl -L -o appimagetool.AppImage https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+chmod 755 appimagetool.AppImage
+./appimagetool.AppImage --appimage-extract
 
-make ocsmanager_build="appimage"
-make DESTDIR="${PKGNAME}.AppDir" prefix="/usr" install
+make ocsmanager_build=appimage
+make DESTDIR="${PKGNAME}.AppDir" prefix=/usr install
 
 install -D -m 755 /usr/lib/x86_64-linux-gnu/libgconf-2.so.4 ${PKGNAME}.AppDir/usr/lib/opendesktop-app-linux-x64/libgconf-2.so.4
 install -D -m 755 /usr/lib/x86_64-linux-gnu/libXss.so.1 ${PKGNAME}.AppDir/usr/lib/opendesktop-app-linux-x64/libXss.so.1
