@@ -10,5 +10,5 @@ branches:
 
 script:
   - mntdir='/mnt/opendesktop-app'
-  - docker run --rm -v $(pwd):${mntdir} ubuntu:14.04 /bin/bash -c "sh ${mntdir}/scripts/build-docker.sh appimage"
+  - docker run --rm -v $(pwd):${mntdir} ubuntu:14.04 /bin/bash -c "sh ${mntdir}/scripts/package.sh ci_appimage"
   - cat transfer.log

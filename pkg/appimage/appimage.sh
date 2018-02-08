@@ -8,7 +8,7 @@ curl -L -o appimagetool.AppImage https://github.com/AppImage/AppImageKit/release
 chmod 755 appimagetool.AppImage
 ./appimagetool.AppImage --appimage-extract
 
-make ocsmanager_build=appimage
+make ocsmanager_bin=appimage
 make DESTDIR="${PKGNAME}.AppDir" prefix=/usr install
 
 install -D -m 755 /usr/lib/x86_64-linux-gnu/libgconf-2.so.4 ${PKGNAME}.AppDir/usr/lib/opendesktop-app-linux-x64/libgconf-2.so.4
