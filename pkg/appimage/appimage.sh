@@ -4,7 +4,7 @@ PKGNAME='opendesktop-app'
 PKGVER='3.0.3'
 PKGREL='1'
 
-curl -L -o appimagetool.AppImage https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+curl -fsSL -o appimagetool.AppImage https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
 chmod 755 appimagetool.AppImage
 ./appimagetool.AppImage --appimage-extract
 
