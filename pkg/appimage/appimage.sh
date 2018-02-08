@@ -21,4 +21,4 @@ install -D -m 644 ${PKGNAME}.AppDir/usr/share/icons/hicolor/scalable/apps/${PKGN
 
 ./squashfs-root/AppRun ${PKGNAME}.AppDir
 
-mv *.AppImage ${PKGNAME}-${PKGVER}-${PKGREL}-x86_64.AppImage
+mv ${PKGNAME}*.AppImage ${PKGNAME}-${PKGVER}-${PKGREL}-x86_64.AppImage
