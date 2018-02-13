@@ -2,9 +2,9 @@
 
 PKGNAME='opendesktop-app'
 
-USER='pkgbuilder'
+PKGUSER='pkgbuilder'
 
-SCRIPT="${0}"
+PKGSCRIPT="${0}"
 
 PROJDIR="$(cd "$(dirname "${0}")/../" && pwd)"
 
@@ -32,10 +32,10 @@ ci_appimage() { # docker-image: ubuntu:14.04
     apt -y remove nodejs npm
     apt -y install libgconf-2-4 libxss1
 
-    useradd -m ${USER}
-    chown -R ${USER} "${PROJDIR}"
+    useradd -m ${PKGUSER}
+    chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${USER} && source /opt/qt59/bin/qt59-env.sh && sh "${SCRIPT}" build_appimage" ${USER}
+    su -c "export HOME=/home/${PKGUSER} && source /opt/qt59/bin/qt59-env.sh && sh "${PKGSCRIPT}" build_appimage" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.AppImage")"
 }
