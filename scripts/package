@@ -35,7 +35,7 @@ ci_appimage() { # docker-image: ubuntu:14.04
     useradd -m ${PKGUSER}
     chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${PKGUSER} && source /opt/qt59/bin/qt59-env.sh && sh "${PKGSCRIPT}" build_appimage" ${PKGUSER}
+    su -c "export HOME=/home/${PKGUSER} && source /opt/qt59/bin/qt59-env.sh && "${PKGSCRIPT}" build_appimage" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.AppImage")"
 }
@@ -47,7 +47,7 @@ build_appimage() {
     tar -xzf "${BUILDDIR}/${PKGNAME}.tar.gz" -C "${BUILDDIR}"
     cp "${PROJDIR}/pkg/appimage/appimagebuild" "${BUILDDIR}/${PKGNAME}"
     cd "${BUILDDIR}/${PKGNAME}"
-    sh appimagebuild
+    ./appimagebuild
 }
 
 export_srcarchive() {

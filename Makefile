@@ -67,7 +67,7 @@ ocs-manager_default:
 	mkdir -p $(build_tmpdir)
 	git clone https://github.com/opendesktop/ocs-manager.git -b $(ocsmanager_tree_ish) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager ; \
-		sh ./scripts/prepare ; \
+		./scripts/prepare ; \
 		qmake ./ocs-manager.pro ; \
 		make
 	install -D -m 755 $(build_tmpdir)/ocs-manager/ocs-manager $(srcdir)/bin/ocs-manager
@@ -76,5 +76,5 @@ ocs-manager_appimage:
 	mkdir -p $(build_tmpdir)
 	git clone https://github.com/opendesktop/ocs-manager.git -b $(ocsmanager_tree_ish) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager ; \
-		sh ./scripts/package build_appimage
+		./scripts/package build_appimage
 	install -D -m 755 `find "$(build_tmpdir)/ocs-manager" -type f -name "ocs-manager*.AppImage"` $(srcdir)/bin/ocs-manager
