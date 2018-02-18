@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 PKGNAME='opendesktop-app'
 PKGVER='3.0.3'

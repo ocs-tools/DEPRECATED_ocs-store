@@ -54,8 +54,8 @@ uninstall:
 	$(RM) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(TARGET).svg
 
 $(TARGET): $(TARGET)-linux-x64
-	install -m 755 $(srcdir)/launcher/$(TARGET).sh ./$(TARGET)
-	install -m 755 $(srcdir)/launcher/$(TARGET)-appimage.sh ./$(TARGET)-appimage
+	install -m 755 $(srcdir)/launcher/$(TARGET) ./$(TARGET)
+	install -m 755 $(srcdir)/launcher/$(TARGET)-appimage ./$(TARGET)-appimage
 
 $(TARGET)-linux-x64: ocs-manager_$(ocsmanager_bin)
 	cd $(srcdir) ; \
@@ -67,7 +67,7 @@ ocs-manager_default:
 	mkdir -p $(build_tmpdir)
 	git clone https://github.com/opendesktop/ocs-manager.git -b $(ocsmanager_tree_ish) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager ; \
-		sh ./scripts/prepare.sh ; \
+		sh ./scripts/prepare ; \
 		qmake ./ocs-manager.pro ; \
 		make
 	install -D -m 755 $(build_tmpdir)/ocs-manager/ocs-manager $(srcdir)/bin/ocs-manager
@@ -76,5 +76,5 @@ ocs-manager_appimage:
 	mkdir -p $(build_tmpdir)
 	git clone https://github.com/opendesktop/ocs-manager.git -b $(ocsmanager_tree_ish) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager ; \
-		sh ./scripts/package.sh build_appimage
+		sh ./scripts/package build_appimage
 	install -D -m 755 `find "$(build_tmpdir)/ocs-manager" -type f -name "ocs-manager*.AppImage"` $(srcdir)/bin/ocs-manager
