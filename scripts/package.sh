@@ -51,13 +51,13 @@ build_appimage() {
 }
 
 export_srcarchive() {
-    if [ "${1}" ]; then
+    if [[ "${1}" ]]; then
         $(cd "${PROJDIR}" && git archive --prefix="${PKGNAME}/" --output="${1}" HEAD)
     fi
 }
 
 transfer_file() {
-    if [ -f "${1}" ]; then
+    if [[ -f "${1}" ]]; then
         filename="$(basename "${1}")"
         transferlog="${PROJDIR}/transfer.log"
         echo "Uploading ${filename}" >> "${transferlog}"
@@ -72,6 +72,6 @@ install_nodejs() {
     n lts
 }
 
-if [ "${1}" ]; then
+if [[ "${1}" = 'ci_'* || "${1}" = 'build_'* ]]; then
     ${1}
 fi
