@@ -19,7 +19,7 @@
     "start": "electron .",
     "debug": "electron . --debug",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "electron-packager . opendesktop-app --platform=linux --arch=x64 --out=out --overwrite --ignore='^/(\\.gitignore|\\.travis\\.yml|Makefile|package\\-lock\\.json|README\\.md|release\\.json|desktop|launcher|pkg|scripts|appimagebuild|appimagetool\\.AppImage|squashfs\\-root|build_.+)($|/)'"
+    "package": "electron-packager . opendesktop-app --platform=linux --arch=x64 --out=out --overwrite --ignore='^/(\\.gitignore|\\.travis\\.yml|Makefile|README\\.md|release\\.json|desktop|launcher|pkg|scripts|appimagebuild|appimagetool\\.AppImage|squashfs\\-root|build_.+)($|/)'"
   },
   "dependencies": {
     "electron-config": "1.0.0",
