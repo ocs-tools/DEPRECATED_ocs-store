@@ -2,8 +2,8 @@
 
 PREFIX="$(cd "$(dirname "${0}")" && pwd)/"
 
-if [ "${APPIMAGE}" ]; then
-    if [ "${1}" = '--install' ]; then
+if [[ "${APPIMAGE}" ]]; then
+    if [[ "${1}" = '--install' ]]; then
         mkdir -p ${HOME}/.local/share/applications
         mkdir -p ${HOME}/.local/bin
 
@@ -20,7 +20,7 @@ if [ "${APPIMAGE}" ]; then
         rm "${APPIMAGE}"
 
         exit 0
-    elif [ "${1}" = '--uninstall' ]; then
+    elif [[ "${1}" = '--uninstall' ]]; then
         rm ${HOME}/.local/share/applications/opendesktop-app.desktop
         rm ${HOME}/.local/share/applications/opendesktop-app.svg
         update-desktop-database ${HOME}/.local/share/applications
@@ -33,17 +33,17 @@ if [ "${APPIMAGE}" ]; then
     fi
 fi
 
-if [ -f "${PREFIX}opendesktop-app-linux-x64/opendesktop-app" ]; then
+if [[ -f "${PREFIX}opendesktop-app-linux-x64/opendesktop-app" ]]; then
     ${PREFIX}opendesktop-app-linux-x64/opendesktop-app
-elif [ -f "${PREFIX}../lib/opendesktop-app-linux-x64/opendesktop-app" ]; then
+elif [[ -f "${PREFIX}../lib/opendesktop-app-linux-x64/opendesktop-app" ]]; then
     ${PREFIX}../lib/opendesktop-app-linux-x64/opendesktop-app
-elif [ -f "${PREFIX}usr/local/lib/opendesktop-app-linux-x64/opendesktop-app" ]; then
+elif [[ -f "${PREFIX}usr/local/lib/opendesktop-app-linux-x64/opendesktop-app" ]]; then
     ${PREFIX}usr/local/lib/opendesktop-app-linux-x64/opendesktop-app
-elif [ -f "${PREFIX}usr/lib/opendesktop-app-linux-x64/opendesktop-app" ]; then
+elif [[ -f "${PREFIX}usr/lib/opendesktop-app-linux-x64/opendesktop-app" ]]; then
     ${PREFIX}usr/lib/opendesktop-app-linux-x64/opendesktop-app
-elif [ -f '/usr/local/lib/opendesktop-app-linux-x64/opendesktop-app' ]; then
+elif [[ -f '/usr/local/lib/opendesktop-app-linux-x64/opendesktop-app' ]]; then
     /usr/local/lib/opendesktop-app-linux-x64/opendesktop-app
-elif [ -f '/usr/lib/opendesktop-app-linux-x64/opendesktop-app' ]; then
+elif [[ -f '/usr/lib/opendesktop-app-linux-x64/opendesktop-app' ]]; then
     /usr/lib/opendesktop-app-linux-x64/opendesktop-app
 else
     exit 1
