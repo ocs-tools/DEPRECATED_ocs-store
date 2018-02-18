@@ -30,19 +30,16 @@ rebuild: clean build ;
 build: $(TARGET) ;
 
 clean:
-	$(RM) ./$(TARGET)
-	$(RM) ./$(TARGET)-appimage
-	$(RM) ./$(TARGET)-linux-x64
 	$(RM) $(build_tmpdir)
 	$(RM) $(srcdir)/node_modules
-	$(RM) $(srcdir)/out
+	$(RM) $(srcdir)/dist
 	$(RM) $(srcdir)/bin
 
 install:
-	$(INSTALL_PROGRAM) ./$(TARGET) $(DESTDIR)$(bindir)/$(TARGET)
-	$(INSTALL_PROGRAM) ./$(TARGET)-appimage $(DESTDIR)$(bindir)/$(TARGET)-appimage
+	$(INSTALL_PROGRAM) $(srcdir)/launcher/$(TARGET) $(DESTDIR)$(bindir)/$(TARGET)
+	$(INSTALL_PROGRAM) $(srcdir)/launcher/$(TARGET)-appimage $(DESTDIR)$(bindir)/$(TARGET)-appimage
 	$(MKDIR) $(DESTDIR)$(libdir)
-	$(CP) ./$(TARGET)-linux-x64 $(DESTDIR)$(libdir)
+	$(CP) $(srcdir)/dist/$(TARGET)-linux-x64 $(DESTDIR)$(libdir)
 	$(INSTALL_DATA) $(srcdir)/desktop/$(TARGET).desktop $(DESTDIR)$(datadir)/applications/$(TARGET).desktop
 	$(INSTALL_DATA) $(srcdir)/desktop/$(TARGET).svg $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(TARGET).svg
 
@@ -53,22 +50,19 @@ uninstall:
 	$(RM) $(DESTDIR)$(datadir)/applications/$(TARGET).desktop
 	$(RM) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(TARGET).svg
 
-$(TARGET): $(TARGET)-linux-x64
-	install -m 755 $(srcdir)/launcher/$(TARGET) ./$(TARGET)
-	install -m 755 $(srcdir)/launcher/$(TARGET)-appimage ./$(TARGET)-appimage
+$(TARGET): $(TARGET)-linux-x64 ;
 
 $(TARGET)-linux-x64: ocs-manager_$(ocsmanager_bin)
 	cd $(srcdir) ; \
 		npm install ; \
 		npm run package
-	cp -Rpf $(srcdir)/out/$(TARGET)-linux-x64 ./
 
 ocs-manager_default:
 	mkdir -p $(build_tmpdir)
 	git clone https://github.com/opendesktop/ocs-manager.git -b $(ocsmanager_tree_ish) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager ; \
 		./scripts/prepare ; \
-		qmake ./ocs-manager.pro ; \
+		qmake ; \
 		make
 	install -D -m 755 $(build_tmpdir)/ocs-manager/ocs-manager $(srcdir)/bin/ocs-manager
 
