@@ -1,4 +1,4 @@
 build_*/
 node_modules/
 bin/
-out/
+dist/
