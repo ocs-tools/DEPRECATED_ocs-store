@@ -15,7 +15,7 @@ ci_appimage() { # docker-image: ubuntu:14.04
     apt -y install curl git
     #apt -y install build-essential qt5-default libqt5websockets5-dev
     #apt -y install cmake libssl-dev libcurl3 libcurl3-gnutls libcurl4-gnutls-dev libxpm-dev
-    apt -y install libssl1.0.0 zlib1g unzip p7zip
+    apt -y install libssl1.0.0 zlib1g unzip p7zip unar
 
     apt -y install software-properties-common
     add-apt-repository -y ppa:beineri/opt-qt594-trusty
