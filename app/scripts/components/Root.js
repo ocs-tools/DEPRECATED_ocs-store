@@ -1,6 +1,4 @@
-'use strict';
-
-import Component from '../../libs/js/Component.js';
+import Component from '../../libs/chirit/Component.js';
 
 import ToolBar from './ToolBar.js';
 import StatusBar from './StatusBar.js';

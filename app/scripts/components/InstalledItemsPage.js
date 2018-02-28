@@ -1,8 +1,6 @@
-'use strict';
-
 const electron = require('electron');
 
-import Component from '../../libs/js/Component.js';
+import Component from '../../libs/chirit/Component.js';
 
 export default class InstalledItemsPage extends Component {
 

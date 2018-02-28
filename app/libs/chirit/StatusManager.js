@@ -1,17 +1,12 @@
-'use strict';
-
 /**
- * js
+ * Chirit
  *
  * @author      Akira Ohgaki <akiraohgaki@gmail.com>
  * @copyright   Akira Ohgaki
  * @license     https://opensource.org/licenses/BSD-2-Clause
- * @link        https://github.com/akiraohgaki/js
+ * @link        https://github.com/akiraohgaki/chirit
  */
 
-/**
- * Status manager
- */
 export default class StatusManager {
 
     constructor(eventTarget) {
@@ -33,23 +28,14 @@ export default class StatusManager {
         this._views = new Map();
     }
 
-    /**
-     * Get all status
-     */
     getStatus() {
         return this._status;
     }
 
-    /**
-     * Get specified state
-     */
     getState(type) {
         return this._status.get(type);
     }
 
-    /**
-     * Register action handler
-     */
     registerAction(type, action, options) {
         const actions = this._actions.has(type) ? this._actions.get(type) : new Map();
         if (!actions.size) {
@@ -60,9 +46,6 @@ export default class StatusManager {
         this._actions.set(type, actions);
     }
 
-    /**
-     * Unregister action handler
-     */
     unregisterAction(type, action) {
         if (this._actions.has(type)) {
             const actions = this._actions.get(type);
@@ -80,18 +63,12 @@ export default class StatusManager {
         }
     }
 
-    /**
-     * Register view handler
-     */
     registerView(type, view, options) {
         const views = this._views.has(type) ? this._views.get(type) : new Map();
         views.set(view, options);
         this._views.set(type, views);
     }
 
-    /**
-     * Unregister view handler
-     */
     unregisterView(type, view) {
         if (this._views.has(type)) {
             const views = this._views.get(type);
@@ -107,9 +84,6 @@ export default class StatusManager {
         }
     }
 
-    /**
-     * Dispatching
-     */
     dispatch(type, params) {
         if (!this._actions.has(type)) {
             console.error(new Error(`No actions for type "${type}"`));
@@ -133,7 +107,7 @@ export default class StatusManager {
             this._status.set(type, state);
 
             if (!this._views.has(type)) {
-                console.log(`No views for type "${type}"`); // It's not error
+                console.log(`No views for type "${type}"`); // This case is not error
                 return;
             }
 

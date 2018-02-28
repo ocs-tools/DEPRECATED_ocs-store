@@ -1,19 +1,15 @@
-'use strict';
-
 /**
- * js
+ * Chirit
  *
  * @author      Akira Ohgaki <akiraohgaki@gmail.com>
  * @copyright   Akira Ohgaki
  * @license     https://opensource.org/licenses/BSD-2-Clause
- * @link        https://github.com/akiraohgaki/js
+ * @link        https://github.com/akiraohgaki/chirit
  */
 
-/**
- * Base class of component classes
- */
 export default class Component {
 
+    // Subclass should use init() instead of constructor()
     constructor(element, state) {
         // "element" will be Element object or selector string
         if (typeof element === 'string') {
@@ -29,10 +25,6 @@ export default class Component {
         this.complete();
     }
 
-    /**
-     * Build the component
-     * Subclass should not override this class method
-     */
     _build() {
         const html = this.html();
         const style = this.style();
@@ -40,42 +32,23 @@ export default class Component {
         this.script();
     }
 
-    /**
-     * Update the component
-     * Subclass should not override this class method
-     */
     update(state) {
         this.state = state;
         this._build();
     }
 
-    /**
-     * Alternative constructor for subclass
-     */
     init() {}
 
-    /**
-     * A class mehod to be called when the component initialization finished
-     */
     complete() {}
 
-    /**
-     * Render HTML content
-     */
     html() {
         return '';
     }
 
-    /**
-     * Render CSS content
-     */
     style() {
         return '';
     }
 
-    /**
-     * Script for the component
-     */
     script() {}
 
 }

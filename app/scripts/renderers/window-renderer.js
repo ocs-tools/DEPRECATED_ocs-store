@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 
@@ -9,7 +7,7 @@ const request = require('request');
 
 const packageMeta = require('../../../package.json');
 
-import StatusManager from '../../libs/js/StatusManager.js';
+import StatusManager from '../../libs/chirit/StatusManager.js';
 import Root from '../components/Root.js';
 
 {
