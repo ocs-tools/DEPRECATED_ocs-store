@@ -2,7 +2,7 @@
 
 const electronConfig = require('electron-config');
 
-import Component from '../../libs/js/Component.js';
+import Component from '../../libs/chirit/Component.js';
 
 export default class ToolBar extends Component {
 

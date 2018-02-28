@@ -1,6 +1,8 @@
 'use strict';
 
-import Component from '../../libs/js/Component.js';
+import Component from '../../libs/chirit/Component.js';
+
+import Utility from '../../libs/chirit/Utility.js';
 
 export default class StatusBarItem extends Component {
 
@@ -125,7 +127,7 @@ export default class StatusBarItem extends Component {
             && this.element.querySelector('.statusbaritem-progress-bar')
         ) {
             this.element.querySelector('.statusbaritem-progress-bar').value = bytesReceived / bytesTotal;
-            this.element.querySelector('.statusbaritem-progress-text').innerHTML = `${js.utility.utility.convertByteToHumanReadable(bytesReceived)} / ${js.utility.utility.convertByteToHumanReadable(bytesTotal)}`;
+            this.element.querySelector('.statusbaritem-progress-text').innerHTML = `${Utility.convertByteToHumanReadable(bytesReceived)} / ${Utility.convertByteToHumanReadable(bytesTotal)}`;
         }
     }
 
