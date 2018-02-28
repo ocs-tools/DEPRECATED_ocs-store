@@ -1,5 +1,3 @@
-'use strict';
-
 const url = require('url');
 
 import Component from '../../libs/chirit/Component.js';

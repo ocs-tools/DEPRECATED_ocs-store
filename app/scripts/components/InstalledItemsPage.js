@@ -1,5 +1,3 @@
-'use strict';
-
 const electron = require('electron');
 
 import Component from '../../libs/chirit/Component.js';

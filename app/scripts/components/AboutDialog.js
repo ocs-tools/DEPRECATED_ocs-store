@@ -1,5 +1,3 @@
-'use strict';
-
 import Component from '../../libs/chirit/Component.js';
 
 import packageMeta from '../../../package.json';

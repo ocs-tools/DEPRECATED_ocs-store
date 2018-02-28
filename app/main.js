@@ -1,5 +1,3 @@
-'use strict';
-
 const electron = require('electron');
 const electronConfig = require('electron-config');
 const childProcess = require('child_process');
