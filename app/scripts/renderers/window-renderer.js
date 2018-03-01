@@ -91,6 +91,7 @@ import Root from '../components/Root.js';
                 updateAvailableItems = data.data[0];
 
                 root.toolBar.update({
+                    active: root.toolBar.state.active,
                     backAction: root.toolBar.state.backAction,
                     forwardAction: root.toolBar.state.forwardAction,
                     homeAction: root.toolBar.state.homeAction,
@@ -123,6 +124,7 @@ import Root from '../components/Root.js';
             }
             else if (data.func === 'DesktopThemeHandler::isApplicableType') {
                 root.toolBar.update({
+                    active: 'collection-page',
                     backAction: 'collection-page',
                     forwardAction: '',
                     homeAction: 'browse-page',
@@ -277,6 +279,7 @@ import Root from '../components/Root.js';
 
         statusManager.registerAction('browse-page', () => {
             root.toolBar.update({
+                active: 'start-page',
                 backAction: 'main-webview-back',
                 forwardAction: 'main-webview-forward',
                 homeAction: 'start-page',
@@ -315,6 +318,7 @@ import Root from '../components/Root.js';
 
         statusManager.registerAction('collection-page', () => {
             root.toolBar.update({
+                active: 'collection-page',
                 backAction: '',
                 forwardAction: '',
                 homeAction: 'browse-page',
@@ -354,6 +358,7 @@ import Root from '../components/Root.js';
 
         statusManager.registerAction('upgrade-page', () => {
             root.toolBar.update({
+                active: 'upgrade-page',
                 backAction: '',
                 forwardAction: '',
                 homeAction: 'browse-page',

@@ -7,6 +7,7 @@ export default class ToolBar extends Component {
     init() {
         if (!this.state) {
             this.state = {
+                active: '',
                 backAction: '',
                 forwardAction: '',
                 homeAction: '',
@@ -28,8 +29,8 @@ export default class ToolBar extends Component {
         return `
             <button class="toolbar-button icon-chevron-left" ${backButtonAttr}></button>
             <button class="toolbar-button icon-chevron-right" ${forwardButtonAttr}></button>
-            <button class="toolbar-button icon-home label" ${homeButtonAttr}>Browse</button>
-            <button class="toolbar-button icon-folder label ${collectionButtonImportant}" ${collectionButtonAttr}>Installed</button>
+            <button class="toolbar-button icon-home label page-button" ${homeButtonAttr}>Browse</button>
+            <button class="toolbar-button icon-folder label page-button ${collectionButtonImportant}" ${collectionButtonAttr}>Installed</button>
             <span class="toolbar-indicator icon-loading"></span>
             <span class="toolbar-spacer"></span>
             <select class="toolbar-select" name="startPage">
@@ -41,7 +42,7 @@ export default class ToolBar extends Component {
             <option value="https://www.opendesktop.org/s/Window-Managers">box-look.org</option>
             <option value="https://www.opendesktop.org/s/Enlightenment">enlightenment-themes.org</option>
             </select>
-            <button class="toolbar-button icon-info important" data-dispatch="upgrade-page"></button>
+            <button class="toolbar-button icon-info page-button important" data-dispatch="upgrade-page"></button>
             <button class="toolbar-button icon-menu" data-dispatch="side-panel"></button>
         `;
     }
@@ -120,6 +121,13 @@ export default class ToolBar extends Component {
             .toolbar-spacer {
                 display: inline-block;
                 flex: 1 1 auto;
+            }
+
+            .page-button[data-dispatch="${this.state.active}"] {
+                background-color: #c7c7c7;
+            }
+            .page-button.important[data-dispatch="${this.state.active}"] {
+                background-color: #40b9ee;
             }
         `;
     }
