@@ -31,8 +31,8 @@ export default class ToolBar extends Component {
             <button class="toolbar-button icon-chevron-right" ${forwardButtonAttr}></button>
             <button class="toolbar-button icon-home label page-button" ${homeButtonAttr}>Browse</button>
             <button class="toolbar-button icon-folder label page-button ${collectionButtonImportant}" ${collectionButtonAttr}>Installed</button>
-            <span class="toolbar-indicator icon-loading"></span>
             <span class="toolbar-spacer"></span>
+            <span class="toolbar-indicator icon-loading"></span>
             <select class="toolbar-select" name="startPage">
             <option value="">Choose Startpage</option>
             <option value="https://www.opendesktop.org/">opendesktop.org</option>
