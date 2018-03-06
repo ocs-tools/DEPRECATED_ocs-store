@@ -426,6 +426,7 @@ import Root from '../components/Root.js';
     function setupWebView() {
         const config = new electronConfig({name: 'application'});
 
+        mainWebview.setAttribute('partition', 'persist:opendesktop');
         mainWebview.setAttribute('src', config.get('startPage'));
         mainWebview.setAttribute('preload', './scripts/renderers/ipc-renderer.js');
 
