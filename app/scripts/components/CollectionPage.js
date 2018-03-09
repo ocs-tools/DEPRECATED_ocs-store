@@ -57,7 +57,7 @@ export default class CollectionPage extends Component {
 
         return `
             .collection-page-content {
-                width: 640px;
+                width: 720px;
                 margin: 2em auto;
             }
 

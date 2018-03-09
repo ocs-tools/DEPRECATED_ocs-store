@@ -48,7 +48,7 @@ export default class UpgradePage extends Component {
 
         return `
             .upgrade-page-content {
-                width: 640px;
+                width: 720px;
                 margin: 2em auto;
             }
 

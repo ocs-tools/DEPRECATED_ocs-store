@@ -80,7 +80,7 @@ export default class InstalledItemsPage extends Component {
 
         return `
             .installeditems-page-content {
-                width: 640px;
+                width: 720px;
                 margin: 2em auto;
             }
 
