@@ -26,37 +26,38 @@ export default class InstalledItemsPage extends Component {
                     const applyThemeParams = JSON.stringify({path: filePath, installType: type});
                     const removeFileParams = JSON.stringify({itemKey: itemKey});
 
+                    let openButton = '';
+                    if (type === 'bin') {
+                        openButton = `<button data-dispatch="open-file" data-params='${openFileParams}'>Run</button>`;
+                    }
+                    else {
+                        openButton = `<button data-dispatch="open-file" data-params='${openFileParams}'>Open</button>`;
+                    }
+
                     let listItemImportant = '';
                     let updateButton = '';
                     if (this.state.updateAvailableItems[itemKey]) {
                         listItemImportant = 'important';
-                        updateButton = `
-                            <button data-dispatch="update-item" data-params='${updateItemParams}'>Update</button>
-                        `;
+                        updateButton = `<button data-dispatch="update-item" data-params='${updateItemParams}'>Update</button>`;
                     }
 
-                    let applyCell = '';
+                    let applyButton = '';
                     if (this.state.isApplicableType) {
-                        applyCell = `
-                            <td class="apply-theme-cell">
-                            <button data-dispatch="apply-theme" data-params='${applyThemeParams}'>Apply</button>
-                            </td>
-                        `;
+                        applyButton = `<button data-dispatch="apply-theme" data-params='${applyThemeParams}'>Apply</button>`;
                     }
 
                     list += `
                         <tr data-item-key="${itemKey}">
-                        <td class="open-file-cell">
+                        <td class="primary-cell">
                         <a class="list-item ${listItemImportant}" href="#" data-dispatch="open-file" data-params='${openFileParams}'>
                         <img src="${previewPic}" width="48" height="48" class="previewpic">
                         ${file}
                         </a>
                         </td>
-                        <td class="update-item-cell">
+                        <td>
+                        ${openButton}
                         ${updateButton}
-                        </td>
-                        ${applyCell}
-                        <td class="remove-file-cell">
+                        ${applyButton}
                         <button data-dispatch="remove-file" data-params='${removeFileParams}'>Remove</button>
                         </td>
                         </tr>
@@ -100,7 +101,7 @@ export default class InstalledItemsPage extends Component {
                 border-top: 1px solid rgba(0,0,0,0.1);
             }
 
-            .installeditems-page-content .installeditems .open-file-cell {
+            .installeditems-page-content .installeditems .primary-cell {
                 width: 100%;
             }
 
