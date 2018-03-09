@@ -54,12 +54,10 @@ export default class InstalledItemsPage extends Component {
                         ${file}
                         </a>
                         </td>
-                        <td>
-                        ${openButton}
-                        ${updateButton}
-                        ${applyButton}
-                        <button data-dispatch="remove-file" data-params='${removeFileParams}'>Remove</button>
-                        </td>
+                        <td>${openButton}</td>
+                        <td>${updateButton}</td>
+                        <td>${applyButton}</td>
+                        <td><button data-dispatch="remove-file" data-params='${removeFileParams}'>Remove</button></td>
                         </tr>
                     `;
                 }
