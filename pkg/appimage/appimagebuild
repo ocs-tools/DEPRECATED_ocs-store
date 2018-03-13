@@ -1,14 +1,14 @@
 #!/bin/bash
 
 PKGNAME='opendesktop-app'
-PKGVER='3.0.4'
+PKGVER='3.1.0'
 PKGREL='1'
 
 curl -fsSL -o appimagetool.AppImage https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
 chmod 755 appimagetool.AppImage
 ./appimagetool.AppImage --appimage-extract
 
-make ocsmanager_bin=appimage
+make
 make DESTDIR="${PKGNAME}.AppDir" prefix=/usr install
 
 install -D -m 755 /usr/lib/x86_64-linux-gnu/libgconf-2.so.4 ${PKGNAME}.AppDir/usr/lib/opendesktop-app-linux-x64/libgconf-2.so.4

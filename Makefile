@@ -4,8 +4,6 @@ TARGET = opendesktop-app
 srcdir = .
 
 build_tmpdir = ./build_tmp
-ocsmanager_bin = default
-ocsmanager_tree_ish = release-0.6.0
 
 DESTDIR =
 prefix = /usr/local
@@ -32,8 +30,8 @@ build: $(TARGET) ;
 clean:
 	$(RM) $(build_tmpdir)
 	$(RM) $(srcdir)/node_modules
-	$(RM) $(srcdir)/dist
 	$(RM) $(srcdir)/bin
+	$(RM) $(srcdir)/dist
 
 install:
 	$(INSTALL_PROGRAM) $(srcdir)/launcher/$(TARGET) $(DESTDIR)$(bindir)/$(TARGET)
@@ -52,23 +50,14 @@ uninstall:
 
 $(TARGET): $(TARGET)-linux-x64 ;
 
-$(TARGET)-linux-x64: ocs-manager_$(ocsmanager_bin)
+$(TARGET)-linux-x64: ocs-manager
 	cd $(srcdir) ; \
 		npm install ; \
 		npm run package
 
-ocs-manager_default:
-	mkdir -p $(build_tmpdir)
-	git clone https://github.com/opendesktop/ocs-manager.git -b $(ocsmanager_tree_ish) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
-	cd $(build_tmpdir)/ocs-manager ; \
-		./scripts/prepare ; \
-		qmake ; \
-		make
-	install -D -m 755 $(build_tmpdir)/ocs-manager/ocs-manager $(srcdir)/bin/ocs-manager
-
-ocs-manager_appimage:
-	mkdir -p $(build_tmpdir)
-	git clone https://github.com/opendesktop/ocs-manager.git -b $(ocsmanager_tree_ish) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
+ocs-manager:
+	$(MKDIR) $(build_tmpdir)
+	git clone https://github.com/opendesktop/ocs-manager.git -b release-0.6.0 --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager ; \
 		./scripts/package build_appimage
-	install -D -m 755 `find "$(build_tmpdir)/ocs-manager" -type f -name "ocs-manager*.AppImage"` $(srcdir)/bin/ocs-manager
+	$(INSTALL_PROGRAM) `find "$(build_tmpdir)/ocs-manager" -type f -name "ocs-manager*.AppImage"` $(srcdir)/bin/ocs-manager

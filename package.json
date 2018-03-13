@@ -1,7 +1,7 @@
 {
   "name": "opendesktop-app",
   "productName": "Opendesktop App",
-  "version": "3.0.4",
+  "version": "3.1.0",
   "_versioncode": 14,
   "_releaseMeta": "https://github.com/opendesktop/opendesktop-app/raw/master/release.json",
   "description": "Opendesktop Official App.",
