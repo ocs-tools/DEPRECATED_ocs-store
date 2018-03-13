@@ -30,8 +30,8 @@ build: $(TARGET) ;
 clean:
 	$(RM) $(build_tmpdir)
 	$(RM) $(srcdir)/node_modules
-	$(RM) $(srcdir)/dist
 	$(RM) $(srcdir)/bin
+	$(RM) $(srcdir)/dist
 
 install:
 	$(INSTALL_PROGRAM) $(srcdir)/launcher/$(TARGET) $(DESTDIR)$(bindir)/$(TARGET)
