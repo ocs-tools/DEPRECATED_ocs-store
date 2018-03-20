@@ -97,7 +97,6 @@ import Root from '../components/Root.js';
                     homeAction: root.toolBar.state.homeAction,
                     collectionAction: root.toolBar.state.collectionAction,
                     indicator: root.toolBar.state.indicator,
-                    upgrade: root.toolBar.state.upgrade,
                     updateAvailable: Object.keys(updateAvailableItems).length ? true : false
                 });
 
@@ -130,7 +129,6 @@ import Root from '../components/Root.js';
                     homeAction: 'browse-page',
                     collectionAction: 'collection-page',
                     indicator: root.toolBar.state.indicator,
-                    upgrade: root.toolBar.state.upgrade,
                     updateAvailable: root.toolBar.state.updateAvailable
                 });
 
@@ -285,7 +283,6 @@ import Root from '../components/Root.js';
                 homeAction: 'start-page',
                 collectionAction: 'collection-page',
                 indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade,
                 updateAvailable: root.toolBar.state.updateAvailable
             });
 
@@ -324,7 +321,6 @@ import Root from '../components/Root.js';
                 homeAction: 'browse-page',
                 collectionAction: 'collection-page',
                 indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade,
                 updateAvailable: root.toolBar.state.updateAvailable
             });
 
@@ -356,21 +352,6 @@ import Root from '../components/Root.js';
             sendWebSocketMessage(params.itemKey, 'ItemHandler::uninstall', [params.itemKey]);
         });
 
-        statusManager.registerAction('upgrade-page', () => {
-            root.toolBar.update({
-                active: 'upgrade-page',
-                backAction: '',
-                forwardAction: '',
-                homeAction: 'browse-page',
-                collectionAction: 'collection-page',
-                indicator: root.toolBar.state.indicator,
-                upgrade: root.toolBar.state.upgrade,
-                updateAvailable: root.toolBar.state.updateAvailable
-            });
-
-            root.mainArea.changePage('upgradePage');
-        });
-
         statusManager.registerAction('check-self-update', (resolve, reject) => {
             console.log('Checking for self update');
 
@@ -387,7 +368,7 @@ import Root from '../components/Root.js';
 
                     if (process.env.APPIMAGE === path.join(remote.app.getPath('home'), '.local', 'bin', 'opendesktop-app.AppImage')) {
                         for (const releasefile of data.releasefiles) {
-                            if (releasefile.url.toLowerCase().endsWith('x86_64.appimage')) {
+                            if (releasefile.url.endsWith('x86_64.AppImage')) {
                                 const dirPath = path.join(remote.app.getPath('home'), '.cache', 'opendesktop-app');
                                 const filePath = path.join(dirPath, 'opendesktop-app.AppImage');
 
@@ -405,9 +386,9 @@ import Root from '../components/Root.js';
                             }
                         }
                     }
-                    else {
-                        resolve(data);
-                    }
+                    //else {
+                    //    resolve(data);
+                    //}
                 }
             })
             .catch((error) => {
@@ -415,10 +396,8 @@ import Root from '../components/Root.js';
             });
         });
 
-        statusManager.registerView('check-self-update', (state) => {
-            root.toolBar.showUpgradeButton();
-            root.mainArea.upgradePage.update(state);
-        });
+        //statusManager.registerView('check-self-update', (state) => {
+        //});
 
         statusManager.dispatch('check-self-update');
     }
