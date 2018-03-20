@@ -16,7 +16,7 @@ export default class InstalledItemsPage extends Component {
         for (const itemKey of Object.keys(this.state.installedItems)) {
             const installedItem = this.state.installedItems[itemKey];
             if (installedItem.install_type === type) {
-                const previewPic = `file://${electron.remote.app.getPath('userData')}/previewpic/${btoa(installedItem.url).slice(-255)}`;
+                const previewPic = `file://${electron.remote.app.getPath('userData')}/previewpic/${this.previewPicFilename(installedItem.url)}`;
                 for (const file of installedItem.files) {
                     totalFiles++;
 
@@ -187,6 +187,11 @@ export default class InstalledItemsPage extends Component {
         }
 
         listItem.querySelector('.update-progress-bar').value = progress;
+    }
+
+    previewPicFilename(url) {
+        // See also window-renderer.js
+        return btoa(url).slice(-255);
     }
 
 }

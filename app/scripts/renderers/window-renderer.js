@@ -167,7 +167,7 @@ import Root from '../components/Root.js';
                                 previewPicUrl = `${data.data[0].metadata.provider}content/previewpic/${data.data[0].metadata.content_id}`;
                             }
                             if (previewPicUrl) {
-                                downloadPreviewPic(previewPicUrl, btoa(data.data[0].metadata.url).slice(-255));
+                                downloadPreviewPic(previewPicUrl, previewPicFilename(data.data[0].metadata.url));
                             }
                         }
                     );
@@ -209,7 +209,7 @@ import Root from '../components/Root.js';
                 sendWebSocketMessage('', 'ConfigHandler::getUsrConfigInstalledItems', []);
             }
             else if (data.func === 'ItemHandler::uninstall') {
-                removePreviewPic(btoa(data.id).slice(-255));
+                removePreviewPic(previewPicFilename(data.id));
             }
             else if (data.func === 'ItemHandler::uninstallStarted') {
                 if (data.data[0].status !== 'success_uninstallstart') {
@@ -538,6 +538,11 @@ import Root from '../components/Root.js';
             console.error(error);
         }
         return false;
+    }
+
+    function previewPicFilename(url) {
+        // See also InstalledItemsPage.js
+        return btoa(url).slice(-255);
     }
 
     function downloadPreviewPic(url, filename) {
