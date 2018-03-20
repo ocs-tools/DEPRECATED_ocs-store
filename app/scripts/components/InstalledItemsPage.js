@@ -16,35 +16,37 @@ export default class InstalledItemsPage extends Component {
         for (const itemKey of Object.keys(this.state.installedItems)) {
             const installedItem = this.state.installedItems[itemKey];
             if (installedItem.install_type === type) {
-                const previewPic = `file://${electron.remote.app.getPath('userData')}/previewpic/${btoa(installedItem.url).slice(-255)}`;
+                const previewPic = `file://${electron.remote.app.getPath('userData')}/previewpic/${this.previewPicFilename(installedItem.url)}`;
                 for (const file of installedItem.files) {
                     totalFiles++;
 
                     const filePath = `${this.state.installTypes[type].destination}/${file}`;
-                    const openFileParams = JSON.stringify({path: filePath});
-                    const updateItemParams = JSON.stringify({itemKey: itemKey});
                     const applyThemeParams = JSON.stringify({path: filePath, installType: type});
+                    const updateItemParams = JSON.stringify({itemKey: itemKey});
+                    const openFileParams = JSON.stringify({path: filePath});
                     const removeFileParams = JSON.stringify({itemKey: itemKey});
 
-                    let openButton = '';
-                    if (type === 'bin') {
-                        openButton = `<button data-dispatch="open-file" data-params='${openFileParams}'>Run</button>`;
-                    }
-                    else {
-                        openButton = `<button data-dispatch="open-file" data-params='${openFileParams}'>Open</button>`;
+                    let applyThemeButton = '';
+                    if (this.state.isApplicableType) {
+                        applyThemeButton = `<button data-dispatch="apply-theme" data-params='${applyThemeParams}'>Apply</button>`;
                     }
 
                     let listItemImportant = '';
-                    let updateButton = '';
+                    let updateItemButton = '';
                     if (this.state.updateAvailableItems[itemKey]) {
                         listItemImportant = 'important';
-                        updateButton = `<button data-dispatch="update-item" data-params='${updateItemParams}'>Update</button>`;
+                        updateItemButton = `<button data-dispatch="update-item" data-params='${updateItemParams}'>Update</button>`;
                     }
 
-                    let applyButton = '';
-                    if (this.state.isApplicableType) {
-                        applyButton = `<button data-dispatch="apply-theme" data-params='${applyThemeParams}'>Apply</button>`;
+                    let openFileButton = '';
+                    if (type === 'bin') {
+                        openFileButton = `<button data-dispatch="open-file" data-params='${openFileParams}'>Run</button>`;
                     }
+                    else {
+                        openFileButton = `<button data-dispatch="open-file" data-params='${openFileParams}'>Open</button>`;
+                    }
+
+                    const removeFileButton = `<button data-dispatch="remove-file" data-params='${removeFileParams}'>Remove</button>`;
 
                     list += `
                         <tr data-item-key="${itemKey}">
@@ -54,10 +56,10 @@ export default class InstalledItemsPage extends Component {
                         ${file}
                         </a>
                         </td>
-                        <td>${openButton}</td>
-                        <td>${updateButton}</td>
-                        <td>${applyButton}</td>
-                        <td><button data-dispatch="remove-file" data-params='${removeFileParams}'>Remove</button></td>
+                        <td>${applyThemeButton}</td>
+                        <td>${updateItemButton}</td>
+                        <td>${openFileButton}</td>
+                        <td>${removeFileButton}</td>
                         </tr>
                     `;
                 }
@@ -153,22 +155,27 @@ export default class InstalledItemsPage extends Component {
     disableItemControl(itemKey) {
         const installedItem = this.element.querySelector(`[data-item-key="${itemKey}"]`);
 
-        const openFileButton = installedItem.querySelector('[data-dispatch="open-file"]');
-        if (openFileButton && openFileButton.hasAttribute('data-dispatch')) {
-            openFileButton.removeAttribute('data-dispatch');
+        const openFileLink = installedItem.querySelector('a[data-dispatch="open-file"]');
+        if (openFileLink && openFileLink.hasAttribute('data-dispatch')) {
+            openFileLink.removeAttribute('data-dispatch');
         }
 
-        const updateItemButton = installedItem.querySelector('[data-dispatch="update-item"]');
-        if (updateItemButton && !updateItemButton.disabled) {
-            updateItemButton.disabled = true;
-        }
-
-        const applyThemeButton = installedItem.querySelector('[data-dispatch="apply-theme"]');
+        const applyThemeButton = installedItem.querySelector('button[data-dispatch="apply-theme"]');
         if (applyThemeButton && !applyThemeButton.disabled) {
             applyThemeButton.disabled = true;
         }
 
-        const removeItemButton = installedItem.querySelector('[data-dispatch="remove-file"]');
+        const updateItemButton = installedItem.querySelector('button[data-dispatch="update-item"]');
+        if (updateItemButton && !updateItemButton.disabled) {
+            updateItemButton.disabled = true;
+        }
+
+        const openFileButton = installedItem.querySelector('button[data-dispatch="open-file"]');
+        if (openFileButton && !openFileButton.disabled) {
+            openFileButton.disabled = true;
+        }
+
+        const removeItemButton = installedItem.querySelector('button[data-dispatch="remove-file"]');
         if (removeItemButton && !removeItemButton.disabled) {
             removeItemButton.disabled = true;
         }
@@ -187,6 +194,11 @@ export default class InstalledItemsPage extends Component {
         }
 
         listItem.querySelector('.update-progress-bar').value = progress;
+    }
+
+    previewPicFilename(url) {
+        // See also window-renderer.js
+        return btoa(url).slice(-255);
     }
 
 }

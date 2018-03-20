@@ -7,7 +7,6 @@ import OcsUrlDialog from './OcsUrlDialog.js';
 import BrowsePage from './BrowsePage.js';
 import CollectionPage from './CollectionPage.js';
 import InstalledItemsPage from './InstalledItemsPage.js';
-import UpgradePage from './UpgradePage.js';
 
 export default class Root extends Component {
 
@@ -20,7 +19,6 @@ export default class Root extends Component {
             <article data-component="BrowsePage"></article>
             <article data-component="CollectionPage"></article>
             <article data-component="InstalledItemsPage"></article>
-            <article data-component="UpgradePage"></article>
         `;
     }
 
@@ -41,7 +39,6 @@ export default class Root extends Component {
         this.browsePage = new BrowsePage('[data-component="BrowsePage"]');
         this.collectionPage = new CollectionPage('[data-component="CollectionPage"]');
         this.installedItemsPage = new InstalledItemsPage('[data-component="InstalledItemsPage"]');
-        this.upgradePage = new UpgradePage('[data-component="UpgradePage"]');
 
         this.hideAllPages();
     }

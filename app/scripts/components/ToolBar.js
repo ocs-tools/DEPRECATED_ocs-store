@@ -13,7 +13,6 @@ export default class ToolBar extends Component {
                 homeAction: '',
                 collectionAction: '',
                 indicator: false,
-                upgrade: false,
                 updateAvailable: false
             };
         }
@@ -42,7 +41,6 @@ export default class ToolBar extends Component {
             <option value="https://www.opendesktop.org/s/Window-Managers">box-look.org</option>
             <option value="https://www.opendesktop.org/s/Enlightenment">enlightenment-themes.org</option>
             </select>
-            <button class="toolbar-button icon-info page-button important" data-dispatch="upgrade-page"></button>
             <button class="toolbar-button icon-menu" data-dispatch="side-panel"></button>
         `;
     }
@@ -134,7 +132,6 @@ export default class ToolBar extends Component {
 
     script() {
         this.state.indicator ? this.showIndicator() : this.hideIndicator();
-        this.state.upgrade ? this.showUpgradeButton() : this.hideUpgradeButton();
 
         const config = new electronConfig({name: 'application'});
 
@@ -162,16 +159,6 @@ export default class ToolBar extends Component {
     hideIndicator() {
         this.state.indicator = false;
         this.element.querySelector('.toolbar-indicator').style.display = 'none';
-    }
-
-    showUpgradeButton() {
-        this.state.upgrade = true;
-        this.element.querySelector('[data-dispatch="upgrade-page"]').style.display = 'inline-block';
-    }
-
-    hideUpgradeButton() {
-        this.state.upgrade = false;
-        this.element.querySelector('[data-dispatch="upgrade-page"]').style.display = 'none';
     }
 
 }
