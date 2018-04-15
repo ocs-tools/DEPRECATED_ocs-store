@@ -1,0 +1,399 @@
+/**
+ * Chirit
+ *
+ * @author      Akira Ohgaki <akiraohgaki@gmail.com>
+ * @copyright   Akira Ohgaki
+ * @license     https://opensource.org/licenses/BSD-2-Clause
+ * @link        https://github.com/akiraohgaki/chirit
+ */
+
+/* Reset */
+*,
+::before,
+::after {
+    box-sizing: inherit;
+}
+
+:root {
+    box-sizing: border-box;
+}
+
+article,
+section,
+nav,
+aside,
+header,
+footer,
+figure,
+figcaption,
+main,
+embed,
+canvas,
+details,
+summary {
+    display: block;
+}
+
+time,
+mark,
+ruby,
+rt,
+rp,
+wbr,
+datalist,
+keygen,
+progress,
+meter {
+    display: inline;
+}
+
+body,
+article,
+section,
+nav,
+aside,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+footer,
+address,
+p,
+hr,
+pre,
+blockquote,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+figure,
+figcaption,
+div,
+main,
+img,
+iframe,
+embed,
+object,
+video,
+audio,
+table,
+caption,
+tbody,
+thead,
+tfoot,
+tr,
+td,
+th,
+form,
+input,
+button,
+select,
+textarea,
+fieldset,
+legend,
+canvas,
+details,
+summary {
+    margin: 0;
+    padding: 0;
+}
+
+/* Sections */
+body {
+    line-height: 1.45;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+    vertical-align: baseline;
+    letter-spacing: 0.05em;
+}
+@media screen {
+    body {
+        background-color: #ffffff;
+        color: #444444;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 90%;
+        cursor: default;
+    }
+}
+@media print {
+    body {
+        background-color: transparent;
+        color: #000000;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 14pt;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 100%;
+    letter-spacing: 0.1em;
+}
+@media print {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        page-break-after: avoid;
+    }
+}
+
+h1 {
+    font-size: 200%;
+}
+
+h2 {
+    font-size: 166%;
+}
+
+h3 {
+    font-size: 125%;
+}
+
+address {
+    font-style: normal;
+}
+
+/* Grouping content */
+p,
+hr,
+pre,
+blockquote,
+ol,
+ul,
+dl {
+    margin: 1em 0;
+}
+
+hr {
+    border: 0;
+    border-top-style: dashed;
+}
+@media screen {
+    hr {
+        border-top-width: 1px;
+        border-top-color: #d4d9df;
+    }
+}
+@media print {
+    hr {
+        border-top-width: 1pt;
+        border-top-color: #cccccc;
+    }
+}
+
+pre {
+    padding: 0.5em;
+    font-family: 'Courier New', Courier, monospace;
+}
+@media screen {
+    pre {
+        overflow: auto;
+        margin-left: 1em;
+        border-left: 0.5em solid #d4d9df;
+        background-color: #fafdff;
+        color: #000000;
+    }
+}
+@media print {
+    pre {
+        overflow: hidden;
+        margin-left: 1.5em;
+        border: 1pt solid #cccccc;
+    }
+}
+
+blockquote {
+    padding: 0.5em;
+    font-family: 'Times New Roman', Times, serif;
+}
+@media screen {
+    blockquote {
+        margin-left: 1em;
+        border-left: 0.5em solid #fdd35c;
+        background-color: #fff3b8;
+        color: #000000;
+    }
+}
+@media print {
+    blockquote {
+        margin-left: 1.5em;
+        border: 1pt dashed #cccccc;
+    }
+}
+
+ol,
+ul,
+dl {
+    margin-left: 2em;
+}
+
+dt {
+    font-weight: bold;
+}
+
+/* Text-level semantics */
+a {
+    text-decoration: none;
+}
+@media screen {
+    a {
+        background-color: transparent;
+        color: #0075c2;
+        outline: none;
+    }
+    a:hover {
+        color: #4496d3;
+    }
+}
+@media print {
+    a {
+        color: #000000;
+    }
+    a[href]::after {
+        font-size: 90%;
+        content: ' (' attr(href) ') ';
+    }
+}
+
+em,
+strong {
+    font-style: normal;
+    font-weight: bold;
+}
+
+/*strong {
+}*/
+@media screen {
+    strong {
+        color: #c70067;
+    }
+}
+
+dfn,
+abbr {
+    border: 0;
+    font-style: normal;
+}
+@media screen {
+    dfn[title],
+    abbr[title] {
+        border-bottom: 1px dotted;
+        cursor: help;
+    }
+}
+@media print {
+    dfn[title]::after,
+    abbr[title]::after {
+        content: ' (' attr(title) ') ';
+    }
+}
+
+/*mark {
+}*/
+@media screen {
+    mark {
+        background-color: #fff352;
+        color: #000000;
+    }
+}
+@media print {
+    mark {
+        border: 1pt solid #cccccc;
+    }
+}
+
+br {
+    letter-spacing: 0;
+}
+
+/* Edits */
+ins {
+    text-decoration: none;
+}
+
+del {
+    text-decoration: line-through;
+}
+@media screen {
+    del {
+        opacity: 0.5;
+    }
+}
+
+/* Embedded content */
+img {
+    border: 0;
+    vertical-align: text-bottom;
+}
+
+/* Tabular data */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+caption,
+th,
+td {
+    padding: 0.5em;
+    font-weight: normal;
+    text-align: left;
+    vertical-align: top;
+}
+
+thead th,
+thead td {
+    vertical-align: bottom;
+}
+
+thead th {
+    font-weight: bold;
+}
+
+/* Forms */
+input,
+button,
+select,
+textarea {
+    font-size: 100%;
+    vertical-align: middle;
+    letter-spacing: normal;
+}
+
+textarea {
+    font-family: 'Courier New', Courier, monospace;
+}
+@media screen {
+    textarea {
+        overflow: auto;
+    }
+}
+@media print {
+    textarea {
+        overflow: hidden;
+    }
+}
+
+fieldset {
+    padding: 0.5em;
+    border: 0;
+}
+
+legend {
+    font-weight: bold;
+}
