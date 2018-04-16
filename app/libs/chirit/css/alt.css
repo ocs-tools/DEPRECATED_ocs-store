@@ -288,6 +288,7 @@ dfn,
 abbr {
     border: 0;
     font-style: normal;
+    text-decoration: none;
 }
 @media screen {
     dfn[title],
