@@ -27,9 +27,7 @@ ci_appimage() { # docker-image: ubuntu:14.04
     curl -fsSL https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.tar.gz | tar -xz --strip-components=1 -C /
     apt -y install libssl-dev libcurl3 libcurl3-gnutls libcurl4-gnutls-dev libxpm-dev
 
-    apt -y install nodejs npm
-    install_nodejs
-    apt -y remove nodejs npm
+    $(git clone https://github.com/tj/n.git -b master --single-branch --depth=1 "${PROJDIR}/n" && cd "${PROJDIR}/n" && make install && rm -rf "${PROJDIR}/n" && n lts)
     apt -y install libgconf-2-4 libxss1
 
     useradd -m ${PKGUSER}
@@ -64,12 +62,6 @@ transfer_file() {
         curl -fsSL -T "${1}" "https://transfer.sh/${filename}" >> "${transferlog}"
         echo '' >> "${transferlog}"
     fi
-}
-
-install_nodejs() {
-    npm cache clean
-    npm install n -g
-    n lts
 }
 
 if [[ "${1}" = 'ci_'* || "${1}" = 'build_'* ]]; then

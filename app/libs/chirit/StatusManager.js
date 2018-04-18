@@ -99,26 +99,26 @@ export default class StatusManager {
         }
 
         Promise.all(promises)
-        .then((status) => {
-            const state = {};
-            for (const _state of status) {
-                Object.assign(state, _state);
-            }
-            this._status.set(type, state);
+            .then((status) => {
+                const state = {};
+                for (const _state of status) {
+                    Object.assign(state, _state);
+                }
+                this._status.set(type, state);
 
-            if (!this._views.has(type)) {
-                console.log(`No views for type "${type}"`); // This case is not error
-                return;
-            }
+                if (!this._views.has(type)) {
+                    console.log(`No views for type "${type}"`); // This case is not error
+                    return;
+                }
 
-            const views = this._views.get(type);
-            for (const [view, options] of views) {
-                view(state, options);
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+                const views = this._views.get(type);
+                for (const [view, options] of views) {
+                    view(state, options);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
 }

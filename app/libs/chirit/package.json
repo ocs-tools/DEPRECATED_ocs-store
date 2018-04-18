@@ -1,9 +1,10 @@
 {
   "name": "chirit",
-  "version": "0.1.0",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "devDependencies": {
-  }
+  "version": "0.2.0",
+  "description": "A front-end library.",
+  "author": "Akira Ohgaki",
+  "license": "BSD-2-Clause",
+  "homepage": "https://github.com/akiraohgaki/chirit",
+  "repository": "https://github.com/akiraohgaki/chirit",
+  "main": "Chirit.js"
 }
