@@ -18,16 +18,15 @@
   "scripts": {
     "start": "electron .",
     "debug": "electron . --debug",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-packager . opendesktop-app --platform=linux --arch=x64 --out=dist --overwrite --ignore='^/(\\.gitignore|\\.travis\\.yml|Makefile|README\\.md|release\\.json|desktop|launcher|pkg|scripts|appimagebuild|appimagetool\\.AppImage|squashfs\\-root|build_.+)($|/)'"
   },
   "dependencies": {
     "electron-config": "1.0.0",
     "import-export": "1.0.1",
-    "request": "2.83.0"
+    "request": "2.85.0"
   },
   "devDependencies": {
-    "electron": "1.8.2",
-    "electron-packager": "11.0.1"
+    "electron": "1.8.4",
+    "electron-packager": "12.0.0"
   }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,14 @@
 <link href="./styles/reset.css" rel="stylesheet">
 <link href="./styles/style.css" rel="stylesheet">
 </head>
-<body>
 
+<body>
 <div data-component="Root"></div>
 
-</body>
 <script>
 require('import-export'); // Polyfill to use ES6 modules syntax in nodejs
 require('./scripts/renderers/window-renderer.js');
 </script>
+</body>
+
 </html>
