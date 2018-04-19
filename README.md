@@ -11,4 +11,4 @@ License: GPL-3+
 
 Download Linux package from:
 
-https://www.linux-apps.com/p/1175480/
+https://www.opendesktop.org/p/1175480/
