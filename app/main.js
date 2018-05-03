@@ -1,5 +1,5 @@
 const electron = require('electron');
-const electronConfig = require('electron-config');
+const electronStore = require('electron-store');
 const childProcess = require('child_process');
 
 const packageMeta = require('../package.json');
@@ -34,8 +34,8 @@ let ocsManager = null;
     }
 
     function createWindow() {
-        const config = new electronConfig({name: 'application', defaults: appConfig.defaults});
-        const windowBounds = config.get('windowBounds');
+        const store = new electronStore({name: 'application', defaults: appConfig.defaults});
+        const windowBounds = store.get('windowBounds');
 
         mainWindow = new BrowserWindow({
             title: packageMeta.productName,
@@ -56,8 +56,8 @@ let ocsManager = null;
         }
 
         mainWindow.on('close', () => {
-            const config = new electronConfig({name: 'application'});
-            config.set('windowBounds', mainWindow.getBounds());
+            const store = new electronStore({name: 'application'});
+            store.set('windowBounds', mainWindow.getBounds());
         });
 
         mainWindow.on('closed', () => {

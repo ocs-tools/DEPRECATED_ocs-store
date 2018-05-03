@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const electron = require('electron');
-const electronConfig = require('electron-config');
+const electronStore = require('electron-store');
 const request = require('request');
 
 const packageMeta = require('../../../package.json');
@@ -290,13 +290,13 @@ import Root from '../components/Root.js';
         });
 
         statusManager.registerAction('start-page', (resolve, reject, params) => {
-            const config = new electronConfig({name: 'application'});
+            const store = new electronStore({name: 'application'});
 
             if (params.startPage) {
-                config.set('startPage', params.startPage);
+                store.set('startPage', params.startPage);
             }
 
-            mainWebview.setAttribute('src', config.get('startPage'));
+            mainWebview.setAttribute('src', store.get('startPage'));
 
             statusManager.dispatch('browse-page');
         });
@@ -403,10 +403,10 @@ import Root from '../components/Root.js';
     }
 
     function setupWebView() {
-        const config = new electronConfig({name: 'application'});
+        const store = new electronStore({name: 'application'});
 
         mainWebview.setAttribute('partition', 'persist:opendesktop');
-        mainWebview.setAttribute('src', config.get('startPage'));
+        mainWebview.setAttribute('src', store.get('startPage'));
         mainWebview.setAttribute('preload', './scripts/renderers/ipc-renderer.js');
 
         mainWebview.addEventListener('did-start-loading', () => {

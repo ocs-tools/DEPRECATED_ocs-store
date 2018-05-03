@@ -1,4 +1,4 @@
-const electronConfig = require('electron-config');
+const electronStore = require('electron-store');
 
 import Component from '../../libs/chirit/Component.js';
 
@@ -133,10 +133,10 @@ export default class ToolBar extends Component {
     script() {
         this.state.indicator ? this.showIndicator() : this.hideIndicator();
 
-        const config = new electronConfig({name: 'application'});
+        const store = new electronStore({name: 'application'});
 
         const selectElement = this.element.querySelector('.toolbar-select[name="startPage"]');
-        const targetElement = selectElement.querySelector(`option[value="${config.get('startPage')}"]`);
+        const targetElement = selectElement.querySelector(`option[value="${store.get('startPage')}"]`);
 
         if (targetElement) {
             targetElement.setAttribute('selected', 'selected');
