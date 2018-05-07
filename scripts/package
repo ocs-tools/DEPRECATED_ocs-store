@@ -28,7 +28,7 @@ ci_appimage() { # docker-image: ubuntu:14.04
     apt -y install libssl-dev libcurl3 libcurl3-gnutls libcurl4-gnutls-dev libxpm-dev
 
     $(git clone https://github.com/tj/n.git -b master --single-branch --depth=1 "${PROJDIR}/n" && cd "${PROJDIR}/n" && make install && rm -rf "${PROJDIR}/n" && n lts)
-    apt -y install libgconf-2-4 libxss1
+    apt -y install libgconf-2-4 libxss1 libcanberra-gtk-module libgnome-keyring0
 
     useradd -m ${PKGUSER}
     chown -R ${PKGUSER} "${PROJDIR}"
