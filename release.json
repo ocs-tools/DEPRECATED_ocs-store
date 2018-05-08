@@ -1,13 +1,13 @@
 {
-    "versionname": "3.1.1",
-    "versioncode": 15,
+    "versionname": "3.1.2",
+    "versioncode": 16,
     "releasepage": "https://www.opendesktop.org/p/1175480/",
     "_see": "https://www.opendesktop.org/ocs/v1/content/data/1175480",
     "releasefiles": [
         {
-            "name": "opendesktop-app-3.1.1-1-x86_64.AppImage",
+            "name": "opendesktop-app-3.1.2-1-x86_64.AppImage",
             "description": "",
-            "url": "https://dl.opendesktop.org/api/files/downloadfile/id/1524152930/s/9b40eb92d07366c0ff67de513d08cfa0/t/1524202061/o/1/opendesktop-app-3.1.1-1-x86_64.AppImage"
+            "url": "https://dl.opendesktop.org/api/files/downloadfile/id/1525764549/s/97e2c96abcd0243e5db3e6b0cb844572/t/1525814231/o/1/opendesktop-app-3.1.2-1-x86_64.AppImage"
         }
     ]
 }
