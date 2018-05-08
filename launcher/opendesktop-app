@@ -37,6 +37,10 @@ if [[ -f "${PREFIX}opendesktop-app-linux-x64/opendesktop-app" ]]; then
     ${PREFIX}opendesktop-app-linux-x64/opendesktop-app
 elif [[ -f "${PREFIX}../lib/opendesktop-app-linux-x64/opendesktop-app" ]]; then
     ${PREFIX}../lib/opendesktop-app-linux-x64/opendesktop-app
+elif [[ -f "${PREFIX}usr/local/lib/opendesktop-app-linux-x64/opendesktop-app" ]]; then
+    ${PREFIX}usr/local/lib/opendesktop-app-linux-x64/opendesktop-app
+elif [[ -f "${PREFIX}usr/lib/opendesktop-app-linux-x64/opendesktop-app" ]]; then
+    ${PREFIX}usr/lib/opendesktop-app-linux-x64/opendesktop-app
 else
     exit 1
 fi
