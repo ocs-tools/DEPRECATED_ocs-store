@@ -60,4 +60,4 @@ ocs-manager:
 	git clone https://github.com/opendesktop/ocs-manager.git -b release-0.6.2 --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager ; \
 		./scripts/package build_appimage
-	$(INSTALL_PROGRAM) `find "$(build_tmpdir)/ocs-manager" -type f -name "ocs-manager*.AppImage"` $(srcdir)/bin/ocs-manager
+	$(INSTALL_PROGRAM) `find "$(build_tmpdir)/ocs-manager" -type f -name "ocs-manager*-x86_64.AppImage"` $(srcdir)/bin/ocs-manager
