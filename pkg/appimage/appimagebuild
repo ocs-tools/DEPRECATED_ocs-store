@@ -4,9 +4,9 @@ PKGNAME='opendesktop-app'
 PKGVER='3.1.1'
 PKGREL='1'
 
-curl -fsSL -o appimagetool.AppImage https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
-chmod 755 appimagetool.AppImage
-./appimagetool.AppImage --appimage-extract
+curl -fsSL -o appimagetool https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+chmod 755 appimagetool
+./appimagetool --appimage-extract
 
 make
 make DESTDIR="${PKGNAME}.AppDir" prefix=/usr install
