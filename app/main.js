@@ -10,6 +10,7 @@ let mainWindow = null;
 let ocsManager = null;
 
 {
+
     const app = electron.app;
     const BrowserWindow = electron.BrowserWindow;
 
@@ -85,4 +86,5 @@ let ocsManager = null;
             createWindow();
         }
     });
+
 }

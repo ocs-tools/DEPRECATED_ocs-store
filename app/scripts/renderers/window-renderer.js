@@ -11,6 +11,7 @@ import StatusManager from '../../libs/chirit/StatusManager.js';
 import Root from '../components/Root.js';
 
 {
+
     const remote = electron.remote;
 
     const webSocketUrl = require(path.join(remote.app.getPath('appData'), 'ocs-manager', 'application.json')).websocket_url;
@@ -548,4 +549,5 @@ import Root from '../components/Root.js';
     }
 
     setup();
+
 }

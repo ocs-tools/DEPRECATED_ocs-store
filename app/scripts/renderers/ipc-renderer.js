@@ -2,6 +2,7 @@ const electron = require('electron');
 const url = require('url');
 
 {
+
     const ipcRenderer = electron.ipcRenderer;
 
     const memberSites = [
@@ -97,4 +98,5 @@ const url = require('url');
         //modifyStyle();
         modifyEvent();
     });
+
 }
