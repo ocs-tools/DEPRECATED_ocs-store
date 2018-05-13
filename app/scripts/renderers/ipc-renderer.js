@@ -7,6 +7,7 @@ const url = require('url');
 
     const memberSites = [
         'opendesktop.org', 'www.opendesktop.org',
+        'forum.opendesktop.org',
 
         'linux-apps.com', 'www.linux-apps.com',
         'linux-appimages.org', 'www.linux-appimages.org',
