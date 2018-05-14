@@ -71,16 +71,18 @@ const url = require('url');
                     event.stopPropagation();
                     ipcRenderer.sendToHost('ocs-url', targetUrl, providerKey, contentId);
                 }
-                else if (parsedUrl.hostname === 'dl.opendesktop.org' && parsedUrl.pathname) {
+                else if (parsedUrl.hostname === 'dl.opendesktop.org') {
                     event.preventDefault();
                     event.stopPropagation();
                     const ocsUrl = `ocs://download?url=${encodeURIComponent(targetUrl)}&type=downloads`;
                     ipcRenderer.sendToHost('ocs-url', ocsUrl, providerKey, contentId);
                 }
-                else if (parsedUrl.hostname
-                    && parsedUrl.hostname !== url.parse(document.URL).hostname
-                    && memberSites.indexOf(parsedUrl.hostname) === -1
-                ) {
+                else if (parsedUrl.hostname && memberSites.indexOf(parsedUrl.hostname) !== -1) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    location.href = targetUrl;
+                }
+                else if (parsedUrl.hostname && memberSites.indexOf(parsedUrl.hostname) === -1) {
                     event.preventDefault();
                     event.stopPropagation();
                     ipcRenderer.sendToHost('external-url', targetUrl);
