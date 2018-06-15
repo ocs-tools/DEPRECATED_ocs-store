@@ -57,7 +57,7 @@ $(TARGET)-linux-x64: ocs-manager
 
 ocs-manager:
 	$(MKDIR) $(build_tmpdir)
-	git clone https://github.com/opendesktop/ocs-manager.git -b release-0.6.3 --single-branch --depth=1 $(build_tmpdir)/ocs-manager
+	git clone https://github.com/opendesktop/ocs-manager.git -b release-0.6.4 --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager ; \
 		./scripts/package build_appimage
 	$(INSTALL_PROGRAM) `find "$(build_tmpdir)/ocs-manager" -type f -name "ocs-manager*-x86_64.AppImage"` $(srcdir)/bin/ocs-manager
