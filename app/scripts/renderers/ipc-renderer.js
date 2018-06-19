@@ -33,6 +33,12 @@ const url = require('url');
     ];
 
     function modifyDocument() {
+        if (document.querySelector('[rel="profile-menu"]')) {
+            const profileMenu = document.querySelector('[rel="profile-menu"]');
+            const userName = profileMenu.querySelector('span').innerHTML;
+            const userImage = profileMenu.querySelector('img').getAttribute('src');
+            ipcRenderer.sendToHost('user-profile', userName, userImage);
+        }
     }
 
     function modifyStyle() {
@@ -99,7 +105,7 @@ const url = require('url');
     }
 
     ipcRenderer.on('dom-modify', () => {
-        //modifyDocument();
+        modifyDocument();
         //modifyStyle();
         modifyEvent();
     });

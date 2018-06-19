@@ -434,7 +434,9 @@ import Root from '../components/Root.js';
             console.log('IPC message received');
             console.log([event.channel, event.args]);
 
-            if (event.channel === 'ocs-url') {
+            if (event.channel === 'user-profile') {
+            }
+            else if (event.channel === 'ocs-url') {
                 statusManager.dispatch('ocs-url-dialog', {
                     ocsUrl: event.args[0],
                     providerKey: event.args[1],
