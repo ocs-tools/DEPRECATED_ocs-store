@@ -1,11 +1,10 @@
 # OCS-Store App
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Build Status](https://travis-ci.org/opendesktop/opendesktop-app.svg?branch=master)](https://travis-ci.org/opendesktop/opendesktop-app)
 
-OCS-Store App.
+Store Frontend and Management Application based on OpenCollaborationServices (OCS) of Opendesktop.org.
 
-Copyright: 2017-2018, Akira Ohgaki
+Copyright: 2017-2018, Opendesktop.org
 
 License: GPL-3+
 

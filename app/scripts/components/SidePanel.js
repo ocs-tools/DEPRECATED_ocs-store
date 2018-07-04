@@ -7,7 +7,7 @@ export default class SidePanel extends Component {
     html() {
         return `
             <header class="menu-items-header">
-            <div class="banner icon-opendesktop-app"></div>
+            <div class="banner icon-ocs-store"></div>
             <h1 class="title">${packageMeta.productName}</h1>
             </header>
 

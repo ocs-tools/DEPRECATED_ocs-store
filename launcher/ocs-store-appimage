@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ -f "${HOME}/.cache/ocs-store/ocs-store.AppImage" ]]; then
+    chmod 755 ${HOME}/.cache/ocs-store/ocs-store.AppImage
+    ${HOME}/.cache/ocs-store/ocs-store.AppImage --install
+fi
+
+if [[ -f "${HOME}/.local/bin/ocs-store.AppImage" ]]; then
+    ${HOME}/.local/bin/ocs-store.AppImage
+fi

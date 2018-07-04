@@ -9,7 +9,7 @@ export default class StartupDialog extends Component {
             <div class="startup-dialog-content">
 
             <div class="content">
-            <div class="banner icon-opendesktop-app"></div>
+            <div class="banner icon-ocs-store"></div>
             <h1 class="title">Welcome to ${packageMeta.productName}</h1>
             <span class="indicator icon-loading">Starting</span>
             </div>

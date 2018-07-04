@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PKGNAME='opendesktop-app'
+PKGNAME='ocs-store'
 PKGVER='3.2.0'
 PKGREL='1'
 
@@ -11,10 +11,10 @@ chmod 755 appimagetool
 make
 make DESTDIR="${PKGNAME}.AppDir" prefix=/usr install
 
-install -D -m 755 /usr/lib/x86_64-linux-gnu/libgconf-2.so.4 ${PKGNAME}.AppDir/usr/lib/opendesktop-app-linux-x64/libgconf-2.so.4
-install -D -m 755 /usr/lib/x86_64-linux-gnu/libXss.so.1 ${PKGNAME}.AppDir/usr/lib/opendesktop-app-linux-x64/libXss.so.1
-install -D -m 755 /usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libcanberra-gtk-module.so ${PKGNAME}.AppDir/usr/lib/opendesktop-app-linux-x64/libcanberra-gtk-module.so
-install -D -m 755 /usr/lib/x86_64-linux-gnu/libgnome-keyring.so.0 ${PKGNAME}.AppDir/usr/lib/opendesktop-app-linux-x64/libgnome-keyring.so.0
+install -D -m 755 /usr/lib/x86_64-linux-gnu/libgconf-2.so.4 ${PKGNAME}.AppDir/usr/lib/ocs-store-linux-x64/libgconf-2.so.4
+install -D -m 755 /usr/lib/x86_64-linux-gnu/libXss.so.1 ${PKGNAME}.AppDir/usr/lib/ocs-store-linux-x64/libXss.so.1
+install -D -m 755 /usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libcanberra-gtk-module.so ${PKGNAME}.AppDir/usr/lib/ocs-store-linux-x64/libcanberra-gtk-module.so
+install -D -m 755 /usr/lib/x86_64-linux-gnu/libgnome-keyring.so.0 ${PKGNAME}.AppDir/usr/lib/ocs-store-linux-x64/libgnome-keyring.so.0
 
 install -D -m 755 ${PKGNAME}.AppDir/usr/bin/${PKGNAME} ${PKGNAME}.AppDir/AppRun
 install -D -m 755 ${PKGNAME}.AppDir/usr/bin/${PKGNAME}-appimage ${PKGNAME}.AppDir/${PKGNAME}-appimage

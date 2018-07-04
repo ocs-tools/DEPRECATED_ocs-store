@@ -9,6 +9,6 @@ branches:
     - /^release\-.+/
 
 script:
-  - mntdir='/mnt/opendesktop-app'
+  - mntdir='/mnt/ocs-store'
   - docker run --rm -v $(pwd):${mntdir} ubuntu:14.04 /bin/bash -c "${mntdir}/scripts/package ci_appimage"
   - cat transfer.log
