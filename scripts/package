@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PKGNAME='opendesktop-app'
+PKGNAME='ocs-store'
 
 PKGUSER='pkgbuilder'
 

@@ -367,11 +367,11 @@ import Root from '../components/Root.js';
                 if (data.versioncode > packageMeta._versioncode) {
                     console.log('Found newer version');
 
-                    if (process.env.APPIMAGE === path.join(remote.app.getPath('home'), '.local', 'bin', 'opendesktop-app.AppImage')) {
+                    if (process.env.APPIMAGE === path.join(remote.app.getPath('home'), '.local', 'bin', 'ocs-store.AppImage')) {
                         for (const releasefile of data.releasefiles) {
                             if (releasefile.url.endsWith('x86_64.AppImage')) {
-                                const dirPath = path.join(remote.app.getPath('home'), '.cache', 'opendesktop-app');
-                                const filePath = path.join(dirPath, 'opendesktop-app.AppImage');
+                                const dirPath = path.join(remote.app.getPath('home'), '.cache', 'ocs-store');
+                                const filePath = path.join(dirPath, 'ocs-store.AppImage');
 
                                 if (!isDirectory(dirPath)) {
                                     fs.mkdirSync(dirPath);
