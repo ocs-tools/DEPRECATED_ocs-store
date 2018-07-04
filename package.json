@@ -3,8 +3,8 @@
   "productName": "Opendesktop App",
   "version": "3.2.0",
   "_versioncode": 18,
-  "_releaseMeta": "https://github.com/opendesktop/opendesktop-app/raw/master/release.json",
   "description": "Opendesktop Official App.",
+  "_releaseMeta": "https://www.opencode.net/OCS/ocs-store/raw/branch/master/release.json",
   "keywords": [
     "Opendesktop",
     "OCS",
@@ -13,7 +13,7 @@
   "author": "Opendesktop.org",
   "license": "GPL-3.0",
   "homepage": "https://www.opendesktop.org/",
-  "repository": "https://github.com/opendesktop/opendesktop-app",
+  "repository": "https://www.opencode.net/OCS/ocs-store",
   "main": "app/main.js",
   "scripts": {
     "start": "electron .",
