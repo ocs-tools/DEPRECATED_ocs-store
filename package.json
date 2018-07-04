@@ -1,6 +1,6 @@
 {
-  "name": "opendesktop-app",
-  "productName": "Opendesktop App",
+  "name": "ocs-store",
+  "productName": "OCS-Store",
   "version": "3.2.0",
   "_versioncode": 18,
   "_releaseMeta": "https://www.opencode.net/OCS/ocs-store/raw/branch/master/release.json",
@@ -18,7 +18,7 @@
   "scripts": {
     "start": "electron .",
     "debug": "electron . --debug",
-    "package": "electron-packager . opendesktop-app --platform=linux --arch=x64 --out=dist --overwrite --ignore='^/(\\.gitignore|\\.travis\\.yml|Makefile|README\\.md|release\\.json|desktop|launcher|pkg|scripts|appimagebuild|appimagetool|squashfs\\-root|build_.+)($|/)'"
+    "package": "electron-packager . ocs-store --platform=linux --arch=x64 --out=dist --overwrite --ignore='^/(\\.gitignore|\\.travis\\.yml|Makefile|README\\.md|release\\.json|desktop|launcher|pkg|scripts|appimagebuild|appimagetool|squashfs\\-root|build_.+)($|/)'"
   },
   "dependencies": {
     "electron-store": "2.0.0",
