@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Opendesktop App
-Exec=opendesktop-app
-Icon=opendesktop-app
+Name=OCS-Store
+Exec=ocs-store
+Icon=ocs-store
 Type=Application
 Terminal=false
 NoDisplay=false
