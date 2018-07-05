@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PKGNAME='ocs-store'
-PKGVER='3.2.0'
+PKGVER='3.3.0'
 PKGREL='1'
 
 curl -fsSL -o appimagetool https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage

@@ -1,7 +1,7 @@
 {
   "name": "ocs-store",
   "productName": "OCS-Store",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "_versioncode": 18,
   "_releaseMeta": "https://www.opencode.net/OCS/ocs-store/raw/branch/master/release.json",
   "description": "Store Frontend and Management Application based on OpenCollaborationServices (OCS) of Opendesktop.org.",
@@ -26,7 +26,7 @@
     "request": "2.87.0"
   },
   "devDependencies": {
-    "electron": "2.0.2",
+    "electron": "2.0.4",
     "electron-packager": "12.1.0"
   }
 }
