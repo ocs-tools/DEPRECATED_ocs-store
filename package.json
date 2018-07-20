@@ -1,8 +1,8 @@
 {
   "name": "ocs-store",
   "productName": "OCS-Store",
-  "version": "3.3.0",
-  "_versioncode": 19,
+  "version": "3.3.1",
+  "_versioncode": 20,
   "_releaseMeta": "https://www.opencode.net/OCS/ocs-store/raw/branch/master/release.json",
   "description": "Store Frontend and Management Application based on OpenCollaborationServices (OCS) of Opendesktop.org.",
   "keywords": [
