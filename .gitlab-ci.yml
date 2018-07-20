@@ -1,0 +1,12 @@
+stages:
+  - build
+
+appimage:
+  stage: build
+  image: ubuntu:14.04
+  only:
+    - master
+    - /^release\-.+/
+  script:
+    - ./scripts/package ci_appimage
+    - cat transfer.log

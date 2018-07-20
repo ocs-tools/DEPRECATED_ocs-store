@@ -5,4 +5,4 @@ Icon=ocs-store
 Type=Application
 Terminal=false
 NoDisplay=false
-Categories=Network;Utility;
+Categories=Network;Settings;
