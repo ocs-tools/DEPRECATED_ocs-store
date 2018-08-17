@@ -4,6 +4,8 @@ PKGNAME='ocs-store'
 PKGVER='3.3.1'
 PKGREL='1'
 
+UPDINFO='zsync|http://dl.opendesktop.org/api/files/download/id/1532435039/as/latest/ocs-store-x86_64.AppImage.zsync'
+
 curl -fsSL -o appimagetool https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
 chmod 755 appimagetool
 ./appimagetool --appimage-extract
@@ -20,6 +22,6 @@ install -D -m 755 ${PKGNAME}.AppDir/usr/bin/${PKGNAME} ${PKGNAME}.AppDir/AppRun
 install -D -m 644 ${PKGNAME}.AppDir/usr/share/applications/${PKGNAME}.desktop ${PKGNAME}.AppDir/${PKGNAME}.desktop
 install -D -m 644 ${PKGNAME}.AppDir/usr/share/icons/hicolor/scalable/apps/${PKGNAME}.svg ${PKGNAME}.AppDir/${PKGNAME}.svg
 
-./squashfs-root/AppRun ${PKGNAME}.AppDir
+./squashfs-root/AppRun -u "${UPDINFO}" ${PKGNAME}.AppDir
 
 mv *-x86_64.AppImage ${PKGNAME}-${PKGVER}-${PKGREL}-x86_64.AppImage
