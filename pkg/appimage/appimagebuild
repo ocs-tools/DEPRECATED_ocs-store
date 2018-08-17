@@ -17,7 +17,6 @@ install -D -m 755 /usr/lib/x86_64-linux-gnu/gtk-2.0/modules/libcanberra-gtk-modu
 install -D -m 755 /usr/lib/x86_64-linux-gnu/libgnome-keyring.so.0 ${PKGNAME}.AppDir/usr/lib/ocs-store-linux-x64/libgnome-keyring.so.0
 
 install -D -m 755 ${PKGNAME}.AppDir/usr/bin/${PKGNAME} ${PKGNAME}.AppDir/AppRun
-install -D -m 755 ${PKGNAME}.AppDir/usr/bin/${PKGNAME}-appimage ${PKGNAME}.AppDir/${PKGNAME}-appimage
 install -D -m 644 ${PKGNAME}.AppDir/usr/share/applications/${PKGNAME}.desktop ${PKGNAME}.AppDir/${PKGNAME}.desktop
 install -D -m 644 ${PKGNAME}.AppDir/usr/share/icons/hicolor/scalable/apps/${PKGNAME}.svg ${PKGNAME}.AppDir/${PKGNAME}.svg
 

@@ -352,55 +352,6 @@ import Root from '../components/Root.js';
         statusManager.registerAction('remove-file', (resolve, reject, params) => {
             sendWebSocketMessage(params.itemKey, 'ItemHandler::uninstall', [params.itemKey]);
         });
-
-        statusManager.registerAction('check-self-update', (resolve, reject) => {
-            console.log('Checking for self update');
-
-            fetch(packageMeta._releaseMeta)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(new Error('Network response was not ok'));
-            })
-            .then((data) => {
-                if (data.versioncode > packageMeta._versioncode) {
-                    console.log('Found newer version');
-
-                    if (process.env.APPIMAGE === path.join(remote.app.getPath('home'), '.local', 'bin', 'ocs-store.AppImage')) {
-                        for (const releasefile of data.releasefiles) {
-                            if (releasefile.url.endsWith('x86_64.AppImage')) {
-                                const dirPath = path.join(remote.app.getPath('home'), '.cache', 'ocs-store');
-                                const filePath = path.join(dirPath, 'ocs-store.AppImage');
-
-                                if (!isDirectory(dirPath)) {
-                                    fs.mkdirSync(dirPath);
-                                }
-
-                                request.get(releasefile.url)
-                                .on('error', (error) => {
-                                    console.error(error);
-                                })
-                                .pipe(fs.createWriteStream(filePath));
-
-                                break;
-                            }
-                        }
-                    }
-                    //else {
-                    //    resolve(data);
-                    //}
-                }
-            })
-            .catch((error) => {
-                reject(error);
-            });
-        });
-
-        //statusManager.registerView('check-self-update', (state) => {
-        //});
-
-        statusManager.dispatch('check-self-update');
     }
 
     function setupWebView() {
