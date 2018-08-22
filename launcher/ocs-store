@@ -2,37 +2,6 @@
 
 PREFIX="$(cd "$(dirname "${0}")" && pwd)/"
 
-if [[ "${APPIMAGE}" ]]; then
-    if [[ "${1}" = '--install' ]]; then
-        mkdir -p ${HOME}/.local/share/applications
-        mkdir -p ${HOME}/.local/bin
-
-        sed -e "s|Exec=ocs-store|Exec=${HOME}/.local/bin/ocs-store|" \
-            -e "s|Icon=ocs-store|Icon=${HOME}/.local/share/applications/ocs-store.svg|" \
-            ${PREFIX}ocs-store.desktop > ${HOME}/.local/share/applications/ocs-store.desktop
-        chmod 644 ${HOME}/.local/share/applications/ocs-store.desktop
-        install -D -m 644 ${PREFIX}ocs-store.svg ${HOME}/.local/share/applications/ocs-store.svg
-        update-desktop-database ${HOME}/.local/share/applications
-
-        ln -sf ocs-store-appimage ${HOME}/.local/bin/ocs-store
-        install -D -m 755 ${PREFIX}ocs-store-appimage ${HOME}/.local/bin/ocs-store-appimage
-        install -D -m 755 "${APPIMAGE}" ${HOME}/.local/bin/ocs-store.AppImage
-        rm "${APPIMAGE}"
-
-        exit 0
-    elif [[ "${1}" = '--uninstall' ]]; then
-        rm ${HOME}/.local/share/applications/ocs-store.desktop
-        rm ${HOME}/.local/share/applications/ocs-store.svg
-        update-desktop-database ${HOME}/.local/share/applications
-
-        unlink ${HOME}/.local/bin/ocs-store
-        rm ${HOME}/.local/bin/ocs-store-appimage
-        rm ${HOME}/.local/bin/ocs-store.AppImage
-
-        exit 0
-    fi
-fi
-
 if [[ -f "${PREFIX}ocs-store-linux-x64/ocs-store" ]]; then
     ${PREFIX}ocs-store-linux-x64/ocs-store
 elif [[ -f "${PREFIX}../lib/ocs-store-linux-x64/ocs-store" ]]; then

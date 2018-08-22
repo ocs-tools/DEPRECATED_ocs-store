@@ -35,7 +35,6 @@ clean:
 
 install:
 	$(INSTALL_PROGRAM) $(srcdir)/launcher/$(TARGET) $(DESTDIR)$(bindir)/$(TARGET)
-	$(INSTALL_PROGRAM) $(srcdir)/launcher/$(TARGET)-appimage $(DESTDIR)$(bindir)/$(TARGET)-appimage
 	$(MKDIR) $(DESTDIR)$(libdir)
 	$(CP) $(srcdir)/dist/$(TARGET)-linux-x64 $(DESTDIR)$(libdir)
 	$(INSTALL_DATA) $(srcdir)/desktop/$(TARGET).desktop $(DESTDIR)$(datadir)/applications/$(TARGET).desktop
@@ -43,7 +42,6 @@ install:
 
 uninstall:
 	$(RM) $(DESTDIR)$(bindir)/$(TARGET)
-	$(RM) $(DESTDIR)$(bindir)/$(TARGET)-appimage
 	$(RM) $(DESTDIR)$(libdir)/$(TARGET)-linux-x64
 	$(RM) $(DESTDIR)$(datadir)/applications/$(TARGET).desktop
 	$(RM) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(TARGET).svg
