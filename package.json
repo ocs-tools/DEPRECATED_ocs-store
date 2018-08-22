@@ -11,7 +11,7 @@
   "author": "Opendesktop.org",
   "license": "GPL-3.0",
   "homepage": "https://www.opendesktop.org/",
-  "repository": "https://www.opencode.net/OCS/ocs-store",
+  "repository": "https://gitlab.opencode.net/OCS/ocs-store",
   "main": "app/main.js",
   "scripts": {
     "start": "electron .",
