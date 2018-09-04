@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 
 PREFIX="$(cd "$(dirname "${0}")" && pwd)"
 
-if [[ -f "${PREFIX}/ocs-store-linux-x64/ocs-store" ]]; then
+if [ -f "${PREFIX}/ocs-store-linux-x64/ocs-store" ]; then
     ${PREFIX}/ocs-store-linux-x64/ocs-store
-elif [[ -f "${PREFIX}/../lib/ocs-store-linux-x64/ocs-store" ]]; then
+elif [ -f "${PREFIX}/../lib/ocs-store-linux-x64/ocs-store" ]; then
     ${PREFIX}/../lib/ocs-store-linux-x64/ocs-store
-elif [[ -f "${PREFIX}/usr/local/lib/ocs-store-linux-x64/ocs-store" ]]; then
+elif [ -f "${PREFIX}/usr/local/lib/ocs-store-linux-x64/ocs-store" ]; then
     ${PREFIX}/usr/local/lib/ocs-store-linux-x64/ocs-store
-elif [[ -f "${PREFIX}/usr/lib/ocs-store-linux-x64/ocs-store" ]]; then
+elif [ -f "${PREFIX}/usr/lib/ocs-store-linux-x64/ocs-store" ]; then
     ${PREFIX}/usr/lib/ocs-store-linux-x64/ocs-store
 else
     exit 1

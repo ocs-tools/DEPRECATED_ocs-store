@@ -8,5 +8,5 @@ appimage:
     - master
     - /^release\-.+/
   script:
-    - ./scripts/package ci_appimage
+    - ./scripts/package appimage
     - cat transfer.log
